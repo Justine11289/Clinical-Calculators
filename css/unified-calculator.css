@@ -1,0 +1,950 @@
+/* =============================================
+   CGMH EHRCALC - 統一計算器樣式系統
+   版本: 2.0.0
+   最後更新: 2025-11-01
+   
+   這個檔案定義了所有計算器的統一樣式
+   請使用這些預定義的 CSS 類，而不是內聯樣式
+   ============================================= */
+
+/* =============================================
+   1. 計算器容器與標題
+   ============================================= */
+
+.calculator-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    margin: -25px -25px 30px -25px;
+    border-radius: 16px 16px 0 0;
+}
+
+.calculator-header h3 {
+    margin: 0 0 10px 0;
+    color: white;
+    background: none;
+    -webkit-text-fill-color: white;
+    font-size: 1.8em;
+}
+
+.calculator-header .description {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.calculator-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.calculator-description {
+    color: #718096;
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+/* =============================================
+   2. 輸入表單組件
+   ============================================= */
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.input-group input[type="number"],
+.input-group input[type="text"],
+.input-group input[type="date"],
+.input-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input-group input:disabled,
+.input-group select:disabled {
+    background: #f7fafc;
+    color: #a0aec0;
+    cursor: not-allowed;
+}
+
+.input-hint {
+    font-size: 0.85em;
+    color: #718096;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* =============================================
+   3. 單選按鈕組 (Radio Buttons)
+   ============================================= */
+
+.radio-group {
+    margin-bottom: 25px;
+}
+
+.radio-group-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 12px;
+    font-size: 1em;
+    display: block;
+}
+
+.radio-option {
+    display: block;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.radio-option:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.02);
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.radio-option.selected {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.08);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.radio-option label {
+    cursor: pointer;
+    margin: 0;
+    font-weight: 400;
+    color: #2d3748;
+}
+
+/* =============================================
+   4. 複選框 (Checkboxes)
+   ============================================= */
+
+.checkbox-group {
+    margin-bottom: 25px;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkbox-option:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.02);
+}
+
+.checkbox-option input[type="checkbox"] {
+    margin-right: 12px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox-option label {
+    cursor: pointer;
+    margin: 0;
+    font-weight: 400;
+    color: #2d3748;
+    flex: 1;
+}
+
+.checkbox-option.checked {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.08);
+}
+
+/* =============================================
+   5. 分段控制 (Segmented Control)
+   ============================================= */
+
+.segmented-control {
+    display: flex;
+    gap: 0;
+    background: #e2e8f0;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 20px;
+}
+
+.segmented-control label {
+    flex: 1;
+    padding: 10px 16px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #4a5568;
+    background: transparent;
+    border: none;
+}
+
+.segmented-control input[type="radio"] {
+    display: none;
+}
+
+.segmented-control label:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.segmented-control label.selected,
+.segmented-control input[type="radio"]:checked + label {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   6. 按鈕樣式
+   ============================================= */
+
+.btn-calculate {
+    width: 100%;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-calculate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.btn-calculate:active {
+    transform: translateY(0);
+}
+
+.btn-calculate:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    padding: 10px 20px;
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #667eea;
+    color: white;
+}
+
+.btn-reset {
+    padding: 10px 20px;
+    background: #f7fafc;
+    color: #718096;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-reset:hover {
+    background: #e2e8f0;
+    border-color: #cbd5e0;
+}
+
+/* =============================================
+   7. 結果顯示
+   ============================================= */
+
+.result-container {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 16px;
+    border: 2px solid rgba(102, 126, 234, 0.15);
+    display: none;
+    animation: slideInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.result-container.show {
+    display: block;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.result-header h4 {
+    color: #2d3748;
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+}
+
+.result-score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.result-score-value {
+    font-size: 4em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.result-score-unit {
+    font-size: 1.2em;
+    color: #a0aec0;
+    margin-left: 10px;
+    font-weight: 400;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    margin: 12px 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.result-item-label {
+    font-size: 0.95em;
+    color: #718096;
+    font-weight: 600;
+}
+
+.result-item-value {
+    font-size: 1.5em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-item-unit {
+    font-size: 0.6em;
+    color: #a0aec0;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+/* =============================================
+   8. 風險/嚴重度指標
+   ============================================= */
+
+.risk-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.risk-badge.low {
+    background: #c6f6d5;
+    color: #22543d;
+}
+
+.risk-badge.moderate {
+    background: #feebc8;
+    color: #7c2d12;
+}
+
+.risk-badge.high {
+    background: #fed7d7;
+    color: #742a2a;
+}
+
+.risk-badge.severe {
+    background: #fc8181;
+    color: #742a2a;
+}
+
+.severity-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.severity-indicator.low {
+    background: #c6f6d5;
+    border: 2px solid #9ae6b4;
+}
+
+.severity-indicator.moderate {
+    background: #feebc8;
+    border: 2px solid #fbd38d;
+}
+
+.severity-indicator.high {
+    background: #fed7d7;
+    border: 2px solid #fc8181;
+}
+
+.severity-indicator-icon {
+    font-size: 1.5em;
+}
+
+.severity-indicator-text {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* =============================================
+   9. 說明與公式區塊
+   ============================================= */
+
+.info-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(241, 245, 249, 0.7);
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.info-section h4 {
+    color: #2d3748;
+    -webkit-text-fill-color: #2d3748;
+    background: none;
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.info-section p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.formula-box {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px solid #e2e8f0;
+    color: #2d3748;
+}
+
+.formula-box p,
+.formula-box ul,
+.formula-box li,
+.formula-box strong {
+    color: #2d3748;
+    -webkit-text-fill-color: #2d3748;
+}
+
+.formula-box table {
+    color: #2d3748;
+}
+
+.formula-box * {
+    -webkit-text-fill-color: inherit;
+}
+
+.formula-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.formula-code {
+    font-family: 'Courier New', Courier, monospace;
+    background: #f7fafc;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
+    overflow-x: auto;
+    line-height: 1.8;
+}
+
+/* =============================================
+   10. 訊息提示
+   ============================================= */
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.6;
+}
+
+.alert-icon {
+    font-size: 1.3em;
+    margin-top: 2px;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.alert.info {
+    background: #e6f7ff;
+    border: 1px solid #91d5ff;
+    color: #0c5460;
+}
+
+.alert.success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert.warning {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+.alert.error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+/* =============================================
+   11. 分隔線與間距
+   ============================================= */
+
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    margin: 30px 0;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title-icon {
+    font-size: 1.3em;
+}
+
+/* =============================================
+   12. 圖表與視覺化
+   ============================================= */
+
+.chart-container {
+    margin: 20px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: #e2e8f0;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+/* =============================================
+   13. 圖片與參考資料
+   ============================================= */
+
+.reference-image {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reference-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* =============================================
+   14. 表格樣式
+   ============================================= */
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.data-table tbody tr {
+    background: white;
+}
+
+.data-table tbody {
+    color: #2d3748;
+}
+
+.data-table th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #2d3748;
+    background: white;
+    -webkit-text-fill-color: #2d3748;
+}
+
+.data-table td strong {
+    color: #1a202c;
+    -webkit-text-fill-color: #1a202c;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover {
+    background: rgba(102, 126, 234, 0.03);
+}
+
+.data-table tr:hover td {
+    color: #2d3748;
+    -webkit-text-fill-color: #2d3748;
+}
+
+/* 确保表格内所有文本元素都可见 */
+.data-table * {
+    color: inherit;
+}
+
+.data-table tbody,
+.data-table tbody tr,
+.data-table tbody td {
+    background: white;
+    color: #2d3748;
+}
+
+.data-table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    -webkit-text-fill-color: white;
+}
+
+/* =============================================
+   15. 響應式設計
+   ============================================= */
+
+@media (max-width: 768px) {
+    .calculator-header {
+        padding: 20px;
+        margin: -20px -20px 20px -20px;
+    }
+    
+    .calculator-header h3 {
+        font-size: 1.4em;
+    }
+    
+    .result-score-value {
+        font-size: 3em;
+    }
+    
+    .result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .data-table {
+        font-size: 0.9em;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px 12px;
+    }
+}
+
+/* =============================================
+   16. 工具類 (Utility Classes)
+   ============================================= */
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+
+.mb-10 { margin-bottom: 10px; }
+.mb-15 { margin-bottom: 15px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-30 { margin-bottom: 30px; }
+
+.p-10 { padding: 10px; }
+.p-15 { padding: 15px; }
+.p-20 { padding: 20px; }
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}
+
+/* =============================================
+   17. Badge 徽章樣式
+   ============================================= */
+
+.badge-points {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    margin-left: 8px;
+}
+
+.badge-points.warning {
+    background: rgba(245, 101, 101, 0.1);
+    color: #f56565;
+}
+
+.badge-risk {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.badge-risk.low {
+    background: rgba(72, 187, 120, 0.15);
+    color: #2f855a;
+    border: 2px solid #48bb78;
+}
+
+.badge-risk.moderate {
+    background: rgba(237, 137, 54, 0.15);
+    color: #c05621;
+    border: 2px solid #ed8936;
+}
+
+.badge-risk.moderate-high {
+    background: rgba(245, 158, 11, 0.15);
+    color: #92400e;
+    border: 2px solid #f59e0b;
+}
+
+.badge-risk.high {
+    background: rgba(245, 101, 101, 0.15);
+    color: #c53030;
+    border: 2px solid #f56565;
+}
+
+/* =============================================
+   18. 結果分解明細樣式
+   ============================================= */
+
+.result-breakdown {
+    background: #f7fafc;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.breakdown-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 12px;
+    font-size: 0.95em;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.breakdown-label {
+    color: #4a5568;
+    font-size: 0.95em;
+}
+
+.breakdown-value {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 0.95em;
+}
+
+/* =============================================
+   19. 列印樣式
+   ============================================= */
+
+@media print {
+    .btn-calculate,
+    .btn-secondary,
+    .btn-reset {
+        display: none;
+    }
+    
+    .result-container {
+        border: 2px solid #2d3748;
+        box-shadow: none;
+    }
+    
+    .calculator-header {
+        background: white !important;
+        color: #2d3748 !important;
+        border: 2px solid #2d3748;
+    }
+    
+    .calculator-header h3 {
+        color: #2d3748 !important;
+    }
+}
+

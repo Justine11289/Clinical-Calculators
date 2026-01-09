@@ -1,0 +1,167 @@
+/* =============================================
+   Sections - 區塊組件樣式
+   ============================================= */
+
+/* ===================
+   Base Section
+   =================== */
+
+.section,
+.ui-section {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6);
+    margin-bottom: var(--spacing-5);
+    box-shadow: var(--shadow-md);
+}
+
+/* ===================
+   Section Header
+   =================== */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-5);
+}
+
+.section-title,
+.ui-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.section-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.section-subtitle,
+.ui-section-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-2);
+}
+
+/* ===================
+   Card Section
+   =================== */
+
+.card,
+.ui-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    padding: var(--card-padding);
+    transition: all var(--transition-normal);
+}
+
+.card:hover,
+.ui-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+/* ===================
+   Calculator Card
+   =================== */
+
+.calculator-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===================
+   Info Section
+   =================== */
+
+.info-section {
+    background: var(--bg-info-section);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-5);
+    margin-top: var(--spacing-5);
+    border-left: 4px solid var(--color-primary);
+}
+
+.info-section h4 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-3);
+    font-size: var(--font-size-lg);
+}
+
+.info-section p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+}
+
+/* ===================
+   Reference Section
+   =================== */
+
+.reference-section {
+    margin-top: var(--spacing-8);
+    padding-top: var(--spacing-6);
+    border-top: 1px solid var(--color-border);
+}
+
+.reference-section h4 {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-3);
+}
+
+.reference-section p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ===================
+   Collapsible Section
+   =================== */
+
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+}
+
+.collapsible-icon {
+    transition: transform var(--transition-fast);
+}
+
+.collapsible.open .collapsible-icon {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-normal);
+}
+
+.collapsible.open .collapsible-content {
+    max-height: 1000px;
+}
+
+/* ===================
+   Divider
+   =================== */
+
+.section-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: var(--spacing-6) 0;
+}

@@ -1,0 +1,184 @@
+/* =============================================
+   MEDCALC EHR - 參考文獻組件樣式
+   Version: 1.0.0
+   
+   從 style.css 提取 (原位置: 530-592, 1714-1845)
+   ============================================= */
+
+/* ===================
+   Citation 樣式
+   =================== */
+
+.citation {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    font-size: 0.8em;
+    color: #555;
+}
+
+.citation h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.citation p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ===================
+   Reference Citation
+   =================== */
+
+.reference-citation {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-top: 25px;
+    color: #2d3748;
+    line-height: 1.8;
+    font-size: 1em;
+}
+
+.reference-citation h5 {
+    margin: 0 0 12px 0;
+    color: #2c3e50;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.reference-citation p {
+    margin: 0;
+    line-height: 1.7;
+    color: #4a5568;
+}
+
+.reference-citation strong {
+    color: #1a202c;
+    font-weight: 600;
+}
+
+.reference-citation em {
+    color: #667eea;
+    font-style: italic;
+}
+
+.reference-citation a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.reference-citation a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* ===================
+   Reference Box
+   =================== */
+
+.reference-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #10b981;
+}
+
+.reference-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===================
+   Reference Links
+   =================== */
+
+.reference-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.reference-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.reference-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.link-icon {
+    font-size: 1.1em;
+}
+
+/* ===================
+   Reference Abstract
+   =================== */
+
+.reference-abstract {
+    background: #f7fafc;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #10b981;
+}
+
+.reference-abstract h5 {
+    margin: 0 0 12px 0;
+    color: #2d3748;
+    font-size: 1.05em;
+    font-weight: 600;
+}
+
+.reference-abstract p {
+    margin: 0;
+    color: #4a5568;
+    line-height: 1.7;
+    font-size: 0.95em;
+}
+
+/* ===================
+   響應式
+   =================== */
+
+@media (max-width: 768px) {
+    .reference-box {
+        padding: 20px;
+    }
+
+    .reference-links {
+        flex-direction: column;
+    }
+
+    .reference-link {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .reference-abstract {
+        padding: 15px;
+    }
+
+    .reference-citation {
+        font-size: 0.9em;
+    }
+}

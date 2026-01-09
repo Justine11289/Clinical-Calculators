@@ -1,0 +1,151 @@
+/* =============================================
+   MEDCALC EHR - 搜索框組件樣式
+   Version: 1.0.0
+   
+   從 style.css 提取
+   ============================================= */
+
+/* ===================
+   搜索容器
+   =================== */
+
+.search-container {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* ===================
+   搜索輸入框
+   =================== */
+
+#search-bar {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    line-height: 1.5;
+    background: white;
+}
+
+#search-bar::placeholder {
+    font-size: 1.1rem;
+    color: #a0aec0;
+    font-weight: 400;
+}
+
+#search-bar:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ===================
+   無搜索結果
+   =================== */
+
+.no-results {
+    color: #666;
+    padding: 15px;
+    text-align: center;
+}
+
+/* ===================
+   控制列（搜索 + 排序）
+   =================== */
+
+.controls-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.controls-row .search-container {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+/* ===================
+   排序選擇器
+   =================== */
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.sort-container label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.9em;
+    text-transform: none;
+    margin-bottom: 0;
+}
+
+.sort-container select {
+    padding: 8px 12px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2d3748;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.sort-container select:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    background: rgba(255, 255, 255, 1);
+}
+
+.sort-container select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ===================
+   響應式
+   =================== */
+
+@media (max-width: 768px) {
+    .controls-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .search-container,
+    .controls-row .search-container {
+        min-width: auto;
+    }
+
+    .sort-container {
+        justify-content: space-between;
+    }
+
+    #search-bar {
+        font-size: 1.5rem;
+        padding: 15px 20px;
+    }
+
+    #search-bar::placeholder {
+        font-size: 1.3rem;
+    }
+}

@@ -1,0 +1,294 @@
+/* Enhanced Features CSS - 新功能樣式 */
+
+/* ========== Header Enhancements ========== */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sort-container select {
+    font-size: 1.35em;
+}
+
+/* Language Toggle Button */
+.language-toggle {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.language-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.language-toggle:active {
+    transform: translateY(0);
+}
+
+/* ========== Filter Buttons ========== */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: white;
+    color: #4a5568;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1.35em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.filter-btn:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.filter-count {
+    background: white;
+    color: #667eea;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: 700;
+    margin-left: 4px;
+}
+
+.filter-btn.active .filter-count {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+/* ========== Category Container ========== */
+.category-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.category-container label,
+.sort-container label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 1.35em;
+    white-space: nowrap;
+}
+
+.category-container select {
+    flex: 1;
+    min-width: 150px;
+    font-size: 1.35em;
+}
+
+/* ========== Calculator Stats ========== */
+.calculator-stats {
+    font-size: 0.9em;
+    color: #718096;
+    text-align: center;
+    margin-top: 15px;
+    padding: 12px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* ========== List Item Enhancements ========== */
+.list-item {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.list-item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 50px;
+    /* Prevent text overlapping with absolute button */
+}
+
+/* Category Badge */
+.category-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    color: #667eea;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    align-self: flex-start;
+}
+
+/* Favorite Button */
+.favorite-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.6em;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    /* Absolute positioning to right */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    /* Ensure above link */
+}
+
+.favorite-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.favorite-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* ========== No Results Message ========== */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #718096;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.no-results::before {
+    content: '🔍';
+    display: block;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 768px) {
+    .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .language-toggle {
+        align-self: flex-end;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .filter-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .controls-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-container,
+    .category-container,
+    .sort-container {
+        width: 100%;
+    }
+
+    .category-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .category-container select {
+        width: 100%;
+    }
+}
+
+/* ========== Animations ========== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.list-item {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.list-item:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.list-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.list-item:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.list-item:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.list-item:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+/* ========== Smooth Transitions ========== */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

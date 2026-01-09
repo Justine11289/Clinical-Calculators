@@ -1,0 +1,499 @@
+/* =============================================
+   MEDCALC EHR - Growth Chart 頁面專屬樣式
+   Version: 1.1.0 (Refactored for Tech Theme)
+   
+   從 style.css 提取 (原位置: 689-1145)
+   Refactored to support CSS Variables for Theming
+   ============================================= */
+
+/* ===================
+   Growth Chart Info
+   =================== */
+
+.growth-chart-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    background: var(--bg-card, linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%));
+    border: 2px solid var(--border-color-light, rgba(102, 126, 234, 0.1));
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.info-card h4 {
+    margin: 0 0 15px 0;
+    color: var(--text-primary, #2d3748);
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.info-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.info-card li {
+    margin-bottom: 8px;
+    color: var(--text-secondary, #4a5568);
+    line-height: 1.5;
+}
+
+/* ===================
+   Chart Layout
+   =================== */
+
+.growth-chart-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.growth-chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* ===================
+   Chart Wrapper
+   =================== */
+
+.chart-wrapper {
+    background: var(--bg-surface, rgba(255, 255, 255, 0.9));
+    border: 2px solid var(--border-color-light, rgba(102, 126, 234, 0.1));
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md, 0 8px 16px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+}
+
+.chart-wrapper:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg, 0 12px 24px rgba(0, 0, 0, 0.15));
+    border-color: var(--border-color, rgba(102, 126, 234, 0.3));
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color-light, rgba(102, 126, 234, 0.1));
+}
+
+.chart-header h4 {
+    margin: 0;
+    color: var(--text-primary, #2d3748);
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.chart-status {
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.status-success {
+    color: var(--text-success, #16a34a);
+}
+
+.status-warning {
+    color: var(--text-warning, #ea580c);
+}
+
+.status-normal {
+    color: var(--text-success, #16a34a);
+    font-weight: 600;
+}
+
+.chart-container {
+    position: relative;
+    height: 500px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.chart-summary {
+    background: var(--bg-hover, rgba(102, 126, 234, 0.05));
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.latest-measurement {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: var(--text-secondary, #4a5568);
+}
+
+.latest-measurement strong {
+    color: var(--text-primary, #2d3748);
+}
+
+/* ===================
+   BMI Note
+   =================== */
+
+.bmi-note {
+    background: var(--bg-warning-light, rgba(251, 191, 36, 0.1));
+    border: 1px solid var(--border-warning, rgba(251, 191, 36, 0.3));
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.bmi-note small {
+    color: var(--text-warning, #92400e);
+    font-weight: 500;
+}
+
+/* ===================
+   Clinical Interpretation
+   =================== */
+
+.clinical-interpretation {
+    background: var(--bg-card, linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%));
+    border: 2px solid var(--border-color-light, rgba(102, 126, 234, 0.1));
+    border-radius: 16px;
+    padding: 25px;
+    margin: 30px 0;
+    position: relative;
+}
+
+.clinical-interpretation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary, linear-gradient(90deg, #667eea 0%, #764ba2 100%));
+    border-radius: 16px 16px 0 0;
+}
+
+.clinical-interpretation h4 {
+    margin: 0 0 20px 0;
+    color: var(--text-primary, #2d3748);
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.interpretation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.interpretation-item {
+    background: var(--bg-surface, rgba(255, 255, 255, 0.7));
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.interpretation-item:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.9));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--border-color, transparent);
+}
+
+.interpretation-item strong {
+    display: block;
+    color: var(--text-primary, #2d3748);
+    font-size: 1.05em;
+    margin-bottom: 8px;
+}
+
+.interpretation-item p {
+    margin: 0;
+    color: var(--text-secondary, #4a5568);
+    line-height: 1.5;
+}
+
+/* ===================
+   Percentile Reference
+   =================== */
+
+.percentile-reference {
+    background: var(--bg-card, linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%));
+    border: 2px solid var(--border-color-light, rgba(102, 126, 234, 0.1));
+    border-radius: 16px;
+    padding: 25px;
+    margin: 30px 0;
+    position: relative;
+}
+
+.percentile-reference::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary, linear-gradient(90deg, #667eea 0%, #764ba2 100%));
+    border-radius: 16px 16px 0 0;
+}
+
+.percentile-reference h4 {
+    margin: 0 0 20px 0;
+    color: var(--text-primary, #2d3748);
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.percentile-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.percentile-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 15px;
+    background: var(--bg-surface, rgba(255, 255, 255, 0.6));
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.percentile-row:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.8));
+    transform: translateX(5px);
+}
+
+.percentile-row.normal-range {
+    background: var(--bg-success-light, rgba(34, 197, 94, 0.1));
+    border: 1px solid var(--text-success, rgba(34, 197, 94, 0.3));
+}
+
+.percentile-label {
+    min-width: 40px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85em;
+    text-align: center;
+    color: white;
+}
+
+.percentile-label.p97,
+.percentile-label.p3 {
+    background-color: #dc2626;
+}
+
+.percentile-label.p95,
+.percentile-label.p5 {
+    background-color: #ea580c;
+}
+
+.percentile-label.p90,
+.percentile-label.p10 {
+    background-color: #ca8a04;
+}
+
+.percentile-label.p75,
+.percentile-label.p25 {
+    background-color: #16a34a;
+}
+
+.percentile-label.p50 {
+    background-color: #0f172a;
+}
+
+.percentile-desc {
+    flex: 1;
+    color: var(--text-secondary, #4a5568);
+    font-size: 0.95em;
+}
+
+/* ===================
+   Growth Velocity
+   =================== */
+
+.growth-velocity-section {
+    background: var(--bg-card, linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%));
+    border: 2px solid var(--border-color-light, rgba(102, 126, 234, 0.1));
+    border-radius: 16px;
+    padding: 25px;
+    margin: 30px 0;
+    position: relative;
+}
+
+.growth-velocity-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary, linear-gradient(90deg, #667eea 0%, #764ba2 100%));
+    border-radius: 16px 16px 0 0;
+}
+
+.growth-velocity-section h4 {
+    margin: 0 0 20px 0;
+    color: var(--text-primary, #2d3748);
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.velocity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.velocity-item {
+    background: var(--bg-surface, rgba(255, 255, 255, 0.7));
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.velocity-item:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.9));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.velocity-item strong {
+    display: block;
+    color: var(--text-primary, #2d3748);
+    margin-bottom: 5px;
+}
+
+.velocity-value {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--color-primary, #2563eb);
+    margin-bottom: 5px;
+}
+
+.velocity-item small {
+    color: var(--text-muted, #6b7280);
+    font-size: 0.85em;
+}
+
+/* ===================
+   No Data States
+   =================== */
+
+.no-growth-data {
+    text-align: center;
+    padding: 40px;
+    background: var(--bg-warning-light, linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%));
+    border: 2px solid var(--border-warning, rgba(251, 191, 36, 0.3));
+    border-radius: 16px;
+    margin: 20px 0;
+}
+
+.no-growth-data h4 {
+    color: var(--text-warning, #92400e);
+    margin-bottom: 15px;
+}
+
+.no-growth-data p {
+    color: var(--text-warning, #a16207);
+    line-height: 1.6;
+}
+
+.no-data {
+    color: var(--text-muted, #6b7280);
+    font-style: italic;
+    text-align: center;
+}
+
+/* ===================
+   Responsive - Large
+   =================== */
+
+@media (min-width: 1200px) {
+    .growth-chart-row {
+        gap: 40px;
+    }
+
+    .chart-container {
+        height: 65vh;
+        min-height: 550px;
+        max-height: 800px;
+    }
+}
+
+/* ===================
+   Responsive - Medium
+   =================== */
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .growth-chart-row {
+        gap: 20px;
+    }
+
+    .chart-container {
+        height: 50vh;
+        min-height: 450px;
+        max-height: 600px;
+    }
+}
+
+/* ===================
+   Responsive - Mobile
+   =================== */
+
+@media (max-width: 768px) {
+    .growth-chart-stack {
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .growth-chart-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .chart-container {
+        height: 45vh;
+        min-height: 350px;
+        max-height: 500px;
+    }
+
+    .growth-chart-info {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .interpretation-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .velocity-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .chart-wrapper {
+        padding: 15px;
+    }
+}

@@ -1,0 +1,210 @@
+/* =============================================
+   MEDCALC EHR - 計算器列表組件樣式
+   Version: 1.1.0
+   
+   從 style.css 提取並優化
+   ============================================= */
+
+/* ===================
+   計算器列表容器 (網格佈局)
+   =================== */
+
+.calculator-list,
+#calculator-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+
+/* 確保大螢幕時至少可以排四個 (如果容器夠寬) */
+@media (min-width: 1400px) {
+
+    .calculator-list,
+    #calculator-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ===================
+   列表項目 (卡片樣式)
+   =================== */
+
+.list-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    /*確保同列卡片等高*/
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    /* 必須相對定位，讓內部的絕對定位子元素參考 */
+}
+
+.list-item:hover {
+    background-color: var(--bg-hover);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+}
+
+.list-item-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    padding-right: 48px;
+    /* 重要：預留空間給右側垂直置中的星星 */
+}
+
+.list-item-title {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.list-item-description {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-top: auto;
+    line-height: 1.5;
+}
+
+/* ===================
+   星號收藏 (垂直置中於右側)
+   =================== */
+
+.list-item-star {
+    font-size: 1.8em;
+    /* 星星尺寸放大 */
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    /* 垂直居中修正 */
+
+    padding: 8px;
+    z-index: 10;
+    line-height: 1;
+}
+
+.list-item-star:hover {
+    color: var(--warning);
+    transform: translateY(-50%) scale(1.2);
+    /* 保持置中同時放大 */
+}
+
+.list-item-star.active {
+    color: var(--warning);
+}
+
+/* ===================
+   計算器連結 (舊版樣式)
+   =================== */
+
+.calculator-link {
+    display: block;
+    padding: 15px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.calculator-link:hover {
+    background-color: var(--bg-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateX(5px);
+}
+
+/* ===================
+   返回連結
+   =================== */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--color-primary);
+    transform: translateX(-5px);
+}
+
+/* ===================
+   無結果狀態
+   =================== */
+
+.no-results {
+    color: var(--text-muted);
+    padding: 30px 15px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* ===================
+   載入動畫
+   =================== */
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
+
+/* ===================
+   響應式
+   =================== */
+
+@media (max-width: 768px) {
+    .list-item {
+        padding: 15px;
+    }
+
+    .list-item-title {
+        font-size: 1em;
+    }
+
+    .list-item-description {
+        font-size: 0.85em;
+    }
+
+    .list-item-star {
+        font-size: 1.5em;
+        /* 手機版星星稍微縮小 */
+    }
+}

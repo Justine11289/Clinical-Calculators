@@ -1,0 +1,147 @@
+/* =============================================
+   Alerts - 警告/提示框組件樣式
+   ============================================= */
+
+/* ===================
+   Base Alert
+   =================== */
+
+.alert,
+.ui-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    
+    padding: var(--spacing-4) var(--spacing-5);
+    margin-bottom: var(--spacing-5);
+    
+    border-radius: var(--radius-lg);
+    border-left: 4px solid;
+}
+
+/* ===================
+   Alert Icon
+   =================== */
+
+.alert-icon,
+.ui-alert-icon {
+    font-size: var(--font-size-xl);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* ===================
+   Alert Content
+   =================== */
+
+.alert-content,
+.ui-alert-content {
+    flex: 1;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+}
+
+.alert-content strong,
+.ui-alert-content strong {
+    display: block;
+    margin-bottom: var(--spacing-1);
+}
+
+/* ===================
+   Alert Variants
+   =================== */
+
+/* Info */
+.alert-info,
+.ui-alert-info {
+    background: var(--color-info-bg);
+    border-color: var(--color-info);
+    color: #1a4f7a;
+}
+
+/* Success */
+.alert-success,
+.ui-alert-success {
+    background: var(--color-success-bg);
+    border-color: var(--color-success);
+    color: #1a5a2e;
+}
+
+/* Warning */
+.alert-warning,
+.ui-alert-warning {
+    background: var(--color-warning-bg);
+    border-color: var(--color-warning);
+    color: #7a4a1a;
+}
+
+/* Danger */
+.alert-danger,
+.ui-alert-danger {
+    background: var(--color-danger-bg);
+    border-color: var(--color-danger);
+    color: #7a1a1a;
+}
+
+/* ===================
+   Dismissible Alert
+   =================== */
+
+.alert-dismissible {
+    position: relative;
+    padding-right: var(--spacing-10);
+}
+
+.alert-close {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    
+    width: 24px;
+    height: 24px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity var(--transition-fast);
+}
+
+.alert-close:hover {
+    opacity: 1;
+}
+
+/* ===================
+   Inline Alert (for forms)
+   =================== */
+
+.alert-inline {
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-3);
+}
+
+/* ===================
+   Error Box (Calculator specific)
+   =================== */
+
+.error-box {
+    background: var(--color-danger-bg);
+    border-left: 4px solid var(--color-danger);
+    padding: var(--spacing-5);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-5) 0;
+}
+
+.error-box .error-title {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-danger);
+    margin-bottom: var(--spacing-2);
+}
+

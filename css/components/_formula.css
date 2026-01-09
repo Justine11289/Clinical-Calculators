@@ -1,0 +1,204 @@
+/* =============================================
+   MEDCALC EHR - 公式區塊組件樣式
+   Version: 1.0.0
+   
+   從 style.css 提取 (原位置: 1301-1433)
+   ============================================= */
+
+/* ===================
+   Formula Section
+   =================== */
+
+/* ===================
+   Formula Section
+   =================== */
+
+.formula-section {
+    margin-top: 30px;
+    padding: 25px;
+    background: var(--bg-formula-section, linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%));
+    border: 2px solid var(--border-color, rgba(102, 126, 234, 0.1));
+    border-radius: 16px;
+    color: var(--text-primary, #2d3748);
+}
+
+.formula-section h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-primary, #4a5568);
+    font-size: 1.2em;
+}
+
+.formula-section h5 {
+    margin-top: 20px;
+    margin-bottom: 12px;
+    color: var(--text-secondary, #4a5568);
+    font-size: 1.1em;
+}
+
+/* ===================
+   Formula Box
+   =================== */
+
+.formula-box {
+    background: var(--bg-card, rgba(255, 255, 255, 0.9));
+    border: 1px solid var(--border-color, rgba(102, 126, 234, 0.2));
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--text-primary, #2d3748);
+}
+
+.formula-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-primary, #2d3748);
+    margin-bottom: 10px;
+}
+
+.formula-equation,
+.formula-math {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-code, #2d3748);
+    font-family: 'Courier New', monospace;
+    background: var(--bg-code-block, rgba(102, 126, 234, 0.1));
+    padding: 16px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, rgba(102, 126, 234, 0.2));
+    display: block;
+    line-height: 1.8;
+    /* Ensure block display for correct padding/margin */
+}
+
+.formula-main {
+    display: inline-block;
+}
+
+/* ===================
+   Formula Notes
+   =================== */
+
+.ui-formula-notes {
+    margin-top: 8px;
+    font-style: italic;
+    color: var(--text-secondary, #666);
+    font-size: 0.9em;
+}
+
+/* ===================
+   Formula Explanation
+   =================== */
+
+.formula-explanation ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.formula-explanation li {
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    background: var(--bg-surface, rgba(255, 255, 255, 0.6));
+    border-radius: 8px;
+    border-left: 4px solid var(--color-accent, #667eea);
+    color: var(--text-primary, #2d3748);
+}
+
+/* ===================
+   Values Grid
+   =================== */
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.value-item {
+    background: var(--bg-surface, rgba(255, 255, 255, 0.8));
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color, rgba(102, 126, 234, 0.2));
+    text-align: center;
+    color: var(--text-primary, #2d3748);
+}
+
+/* ===================
+   Clinical Note
+   =================== */
+
+.clinical-note {
+    background: var(--bg-warning-light, rgba(255, 193, 7, 0.1));
+    border: 2px solid var(--border-warning, rgba(255, 193, 7, 0.3));
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.clinical-note p {
+    margin: 0;
+    color: var(--text-warning, #856404);
+    font-weight: 500;
+}
+
+/* ===================
+   Calculator Notes
+   =================== */
+
+.calculator-notes {
+    margin-top: 30px;
+    padding: 25px;
+    background: var(--bg-surface, linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%));
+    border-radius: 16px;
+    border: 2px solid var(--border-color, rgba(102, 126, 234, 0.1));
+    backdrop-filter: blur(10px);
+    position: relative;
+    color: var(--text-primary, #2d3748);
+}
+
+.calculator-notes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-accent, linear-gradient(90deg, #667eea 0%, #764ba2 100%));
+    border-radius: 16px 16px 0 0;
+}
+
+/* ===================
+   響應式
+   =================== */
+
+@media (max-width: 768px) {
+    .formula-section {
+        padding: 20px 15px;
+    }
+
+    .formula-box {
+        padding: 15px;
+    }
+
+    .formula-equation,
+    .formula-math,
+    .formula-code {
+        font-size: 1rem;
+        padding: 14px 16px;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .formula-equation,
+    .formula-math,
+    .formula-code {
+        font-size: 0.95rem;
+        padding: 12px 14px;
+    }
+}

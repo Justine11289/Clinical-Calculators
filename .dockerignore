@@ -1,0 +1,55 @@
+# Git
+.git
+.gitignore
+.github
+
+# Node modules (if any)
+node_modules
+npm-debug.log
+package-lock.json
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+*.md
+!README.md
+CODE_ANALYSIS_REPORT_CN.md
+CONTRIBUTING.md
+DEVELOPMENT.md
+EXAMPLE_CALCULATOR_IMPROVED.md
+IMAGE_OPTIMIZATION_GUIDE.md
+IMPROVEMENTS_SUMMARY.md
+OPTIMIZATION_COMPLETE_SUMMARY.md
+TASK_COMPLETION_SUMMARY.md
+UNIT_CONVERSION_GUIDE.md
+UNIT_CONVERSION_PROGRESS.md
+QUICK_START.md
+QUICK_START_UNIT_CONVERSION_CN.md
+
+# Tests
+tests/
+jest.config.js
+*.test.js
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+
+
+

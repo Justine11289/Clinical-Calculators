@@ -1,0 +1,328 @@
+/* =============================================
+   MEDCALC EHR - Trade-off Analysis Page Styles
+   Version: 1.0.0
+   
+   Extracted from src/calculators/trade-off-analysis/index.ts
+   Refactored to support Tech Theme variables
+   ============================================= */
+
+.trade-off-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .trade-off-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.factors-container {
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    /* For scrollbar space */
+}
+
+.risk-factor-item {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg-card, #ffffff);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.risk-factor-item:hover {
+    background: var(--bg-hover, #f9fafb);
+    border-color: var(--color-primary, #e5e7eb);
+}
+
+.risk-factor-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-primary, #111827);
+}
+
+.risk-factor-label input[type="checkbox"],
+.risk-factor-label input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--color-primary, #2563eb);
+}
+
+.factor-text {
+    flex: 1;
+}
+
+.hr-badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-left: 1.75rem;
+    flex-wrap: wrap;
+}
+
+.hr-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
+.hr-badge-bleeding {
+    background: var(--bg-warning-light, rgba(249, 115, 22, 0.15));
+    color: var(--text-warning, #c2410c);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.hr-badge-ischemic {
+    background: var(--bg-info-light, rgba(13, 148, 136, 0.15));
+    color: var(--text-info, #0f766e);
+    border: 1px solid rgba(13, 148, 136, 0.2);
+}
+
+/* Legend Styles */
+.trade-off-legend {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary, #f9fafb);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary, #4b5563);
+    border: 1px solid var(--border-color-light, transparent);
+}
+
+.legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.legend-color {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    margin-top: 0.125rem;
+}
+
+/* Result Zone Styles */
+.result-zone {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.result-zone.ischemic_dominant {
+    background: var(--bg-info-light, rgba(13, 148, 136, 0.15));
+    border: 1px solid var(--text-info, #0d9488);
+    color: var(--text-info, #0f766e);
+}
+
+.result-zone.equivalent {
+    background: var(--bg-surface, rgba(107, 114, 128, 0.15));
+    border: 1px solid var(--text-muted, #6b7280);
+    color: var(--text-primary, #374151);
+}
+
+.result-zone.bleeding_dominant {
+    background: var(--bg-warning-light, rgba(249, 115, 22, 0.15));
+    border: 1px solid var(--text-warning, #f97316);
+    color: var(--text-warning, #c2410c);
+}
+
+.result-zone p {
+    margin-top: 0.5rem;
+    font-weight: normal;
+}
+
+/* Risk Values Display */
+.risk-values {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin: 1rem 0;
+    font-size: 1.125rem;
+}
+
+.risk-value {
+    text-align: center;
+    color: var(--text-secondary, #6b7280);
+}
+
+.risk-value .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.risk-value.bleeding .value {
+    color: var(--text-warning, #f97316);
+}
+
+.risk-value.ischemic .value {
+    color: var(--text-info, #0d9488);
+}
+
+.factor-group-title {
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid var(--border-color, #e5e7eb);
+    color: var(--text-primary, #111827);
+}
+
+/* Vertical Bar Chart */
+.vertical-bar-chart {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 3rem;
+    height: 360px;
+    margin: 1.5rem 0;
+    padding: 1.5rem 3rem;
+    background: var(--bg-surface, #f9fafb);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color, transparent);
+}
+
+/* Force dark background in tech-theme if variables fail */
+body.tech-theme .vertical-bar-chart,
+body[data-theme="tech"] .vertical-bar-chart {
+    background: #1f2937 !important;
+    /* dark-800 */
+    border-color: #374151 !important;
+    /* dark-700 */
+}
+
+body.tech-theme .risk-factor-item,
+body[data-theme="tech"] .risk-factor-item {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+}
+
+body.tech-theme .trade-off-legend,
+body[data-theme="tech"] .trade-off-legend {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+    color: #e5e7eb !important;
+}
+
+.vertical-bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+}
+
+.vertical-bar-wrapper {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--bg-surface, #e5e7eb);
+    border-radius: 0.5rem 0.5rem 0 0;
+    overflow: hidden;
+}
+
+.vertical-bar-fill {
+    width: 100%;
+    height: 7%;
+    transition: height 0.5s ease-out;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    /* Always white text on colored bars */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.vertical-bar-fill.bleeding {
+    background: linear-gradient(180deg, #fb923c, #ea580c);
+}
+
+.vertical-bar-fill.ischemic {
+    background: linear-gradient(180deg, #14b8a6, #0d9488);
+}
+
+.vertical-bar-label {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 0.75rem;
+    color: var(--text-secondary, #374151);
+}
+
+.vertical-bar-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+.vertical-bar-value.bleeding {
+    color: var(--text-warning, #ea580c);
+    text-shadow: 0 0 10px rgba(234, 88, 12, 0.2);
+}
+
+.vertical-bar-value.ischemic {
+    color: var(--text-info, #0d9488);
+    text-shadow: 0 0 10px rgba(13, 148, 136, 0.2);
+}
+
+/* Calculator Header */
+.calculator-header {
+    background: var(--gradient-header, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    color: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.calculator-header h1 {
+    margin: 0;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: white !important;
+    /* Force white for header text */
+    -webkit-text-fill-color: initial;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.calculator-header .subtitle {
+    margin: 0.5rem 0 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    opacity: 0.95;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.calculator-header .description {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+    opacity: 0.85;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.loading-text {
+    text-align: center;
+    color: var(--text-muted, #6b7280);
+}

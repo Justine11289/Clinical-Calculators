@@ -1,0 +1,245 @@
+/* FHIR Feedback Styles */
+
+/* Wrapper for positioning indicators */
+.fhir-feedback-wrapper {
+    position: relative;
+}
+
+/* Feedback indicator (icon next to input) */
+.fhir-feedback-indicator {
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    cursor: help;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.fhir-feedback-indicator:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+/* Tooltip */
+.fhir-feedback-tooltip {
+    position: absolute;
+    top: 50%;
+    right: -35px;
+    transform: translateY(-50%) translateX(100%);
+    background: #2c3e50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.fhir-feedback-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 6px 0;
+    border-color: transparent #2c3e50 transparent transparent;
+}
+
+.fhir-feedback-indicator:hover .fhir-feedback-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(calc(100% + 5px));
+}
+
+/* Status colors */
+.fhir-status-loading {
+    color: #3498db;
+    animation: fhir-pulse 1.5s ease-in-out infinite;
+}
+
+.fhir-status-success {
+    color: #27ae60;
+}
+
+.fhir-status-warning {
+    color: #f39c12;
+}
+
+.fhir-status-error {
+    color: #e74c3c;
+}
+
+.fhir-status-info {
+    color: #3498db;
+}
+
+@keyframes fhir-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Loading banner */
+.fhir-loading-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.fhir-loading-banner .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: fhir-spin 0.8s linear infinite;
+}
+
+@keyframes fhir-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Summary notification */
+.fhir-data-summary {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.fhir-data-summary.success {
+    background: #d4edda;
+    border-left: 4px solid #27ae60;
+    color: #155724;
+}
+
+.fhir-data-summary.warning {
+    background: #fff3cd;
+    border-left: 4px solid #f39c12;
+    color: #856404;
+}
+
+.fhir-data-summary.error {
+    background: #f8d7da;
+    border-left: 4px solid #e74c3c;
+    color: #721c24;
+}
+
+.fhir-data-summary .icon {
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.fhir-data-summary .content {
+    flex: 1;
+}
+
+.fhir-data-summary .title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.fhir-data-summary .details {
+    font-size: 0.95em;
+    opacity: 0.9;
+}
+
+.fhir-data-summary .missing-list {
+    margin-top: 8px;
+    padding-left: 20px;
+}
+
+.fhir-data-summary .missing-list li {
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Animation for removing items */
+.fhir-data-summary .missing-list li.removing {
+    opacity: 0;
+    transform: translateX(-20px);
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Animation for adding items */
+.fhir-data-summary .missing-list li.adding {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+/* Smooth transition for banner state change */
+.fhir-data-summary {
+    transition: all 0.3s ease;
+}
+
+/* Inline field feedback */
+.fhir-field-feedback {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 0.85em;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.fhir-field-feedback.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.fhir-field-feedback.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.fhir-field-feedback.info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.fhir-field-feedback .icon {
+    flex-shrink: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .fhir-feedback-indicator {
+        right: -25px;
+        font-size: 16px;
+    }
+
+    .fhir-feedback-tooltip {
+        font-size: 0.8em;
+        max-width: 200px;
+        white-space: normal;
+    }
+}

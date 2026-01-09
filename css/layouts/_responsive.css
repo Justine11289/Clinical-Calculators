@@ -1,0 +1,253 @@
+/* =============================================
+   Responsive - 響應式佈局樣式
+   ============================================= */
+
+/* ===================
+   Tablet (768px - 1024px)
+   =================== */
+
+@media (max-width: 1024px) {
+    :root {
+        --container-padding: 30px;
+    }
+
+    .two-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .calculator-list {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* ===================
+   Mobile (< 768px)
+   =================== */
+
+@media (max-width: 768px) {
+    :root {
+        --container-padding: 20px;
+        --font-size-lg: 1rem;
+        --font-size-xl: 1.125rem;
+        --font-size-2xl: 1.25rem;
+        --font-size-3xl: 1.5rem;
+        --font-size-4xl: 1.875rem;
+    }
+
+    body {
+        padding: var(--spacing-3);
+    }
+
+    .container {
+        min-height: auto;
+        max-height: none;
+        border-radius: var(--radius-xl);
+    }
+
+    /* Header */
+    .sticky-header {
+        position: relative;
+        padding: var(--spacing-5);
+        margin: calc(-1 * var(--container-padding));
+        margin-bottom: 0;
+    }
+
+    .header-top {
+        flex-direction: column;
+        gap: var(--spacing-3);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    h2 {
+        font-size: var(--font-size-xl);
+    }
+
+    /* Calculator List */
+    .calculator-list {
+        grid-template-columns: 1fr;
+    }
+
+    .list-item {
+        padding: var(--spacing-4);
+    }
+
+    /* Controls */
+    .controls-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-container {
+        min-width: 100%;
+    }
+
+    .category-container,
+    .sort-container {
+        width: 100%;
+    }
+
+    .category-container select,
+    .sort-container select {
+        flex: 1;
+    }
+
+    /* Filter Buttons */
+    .filter-buttons {
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    /* Calculator Page */
+    .calculator-header {
+        padding: var(--spacing-5);
+        margin: calc(-1 * var(--spacing-5)) calc(-1 * var(--spacing-5)) var(--spacing-5) calc(-1 * var(--spacing-5));
+    }
+
+    .calculator-header h3 {
+        font-size: var(--font-size-xl);
+    }
+
+    .calculator-card {
+        padding: var(--spacing-5);
+    }
+
+    /* Radio/Checkbox Groups */
+    .radio-group,
+    .ui-radio-group {
+        flex-direction: column;
+    }
+
+    .radio-option,
+    .ui-radio-option {
+        min-width: 100%;
+    }
+
+    /* Result Box */
+    .result-value,
+    .ui-result-value {
+        font-size: 2.5rem;
+    }
+
+    .result-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Buttons */
+    .btn-group,
+    .ui-button-group {
+        flex-direction: column;
+    }
+
+    .calculate-btn,
+    #calculate-btn {
+        font-size: var(--font-size-lg);
+    }
+}
+
+/* ===================
+   Small Mobile (< 480px)
+   =================== */
+
+@media (max-width: 480px) {
+    :root {
+        --container-padding: 15px;
+    }
+
+    body {
+        padding: var(--spacing-2);
+    }
+
+    h1 {
+        font-size: var(--font-size-xl);
+    }
+
+    .section,
+    .ui-section {
+        padding: var(--spacing-4);
+    }
+
+    .input-group label,
+    .ui-input-group label {
+        font-size: var(--font-size-sm);
+    }
+
+    .radio-option,
+    .checkbox-option,
+    .ui-radio-option,
+    .ui-checkbox-option {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-value,
+    .ui-result-value {
+        font-size: 2rem;
+    }
+}
+
+/* ===================
+   Print Styles
+   =================== */
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .container {
+        box-shadow: none;
+        border: none;
+        max-height: none;
+    }
+
+    .sticky-header {
+        position: static;
+    }
+
+    .back-link,
+    .filter-buttons,
+    .controls-row,
+    .favorite-btn,
+    .calculate-btn,
+    #calculate-btn {
+        display: none;
+    }
+
+    .calculator-header {
+        background: var(--color-primary);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* ===================
+   Reduced Motion
+   =================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .container::before {
+        animation: none;
+    }
+}
+

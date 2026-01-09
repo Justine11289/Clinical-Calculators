@@ -1,0 +1,405 @@
+/* =============================================
+   MEDCALC EHR - 表格組件樣式
+   Version: 1.1.0 (Updated)
+   
+   統一的表格樣式，用於：
+   - 評分標準表格 (Scoring Criteria)
+   - 解釋表格 (Interpretation)
+   - 一般數據表格 (Reference Table)
+   ============================================= */
+
+/* ===================
+   基礎表格
+   =================== */
+
+.ui-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-3, 12px);
+    font-size: 0.95rem;
+}
+
+.ui-table--bordered {
+    border: 1px solid var(--color-border, #ddd);
+}
+
+.ui-table--responsive {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Generic Table Styles (for tables without BEM classes) */
+.ui-table th,
+.ui-table td {
+    padding: var(--spacing-3, 12px);
+    border-bottom: 1px solid var(--color-border, #ddd);
+    text-align: left;
+}
+
+.ui-table th {
+    font-weight: 600;
+    color: #5f6368;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+/* ===================
+   表格行
+   =================== */
+
+.ui-table__row {
+    transition: background-color 0.2s ease;
+}
+
+.ui-table__row:hover,
+.ui-table tr:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+/* 表頭行 */
+.ui-table__row--header {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.ui-table__row--header:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+/* 分類標題行 */
+.ui-table__row--category {
+    background: rgba(102, 126, 234, 0.15);
+}
+
+.ui-table__row--category:hover {
+    background: rgba(102, 126, 234, 0.18);
+}
+
+.ui-table__row--category .ui-table__cell {
+    font-weight: 600;
+    color: #333;
+    padding-left: var(--spacing-3, 12px);
+}
+
+/* 嚴重程度行背景 */
+.ui-table__row--success {
+    background: rgba(40, 167, 69, 0.15);
+}
+
+.ui-table__row--success:hover {
+    background: rgba(40, 167, 69, 0.2);
+}
+
+.ui-table__row--warning {
+    background: rgba(255, 193, 7, 0.15);
+}
+
+.ui-table__row--warning:hover {
+    background: rgba(255, 193, 7, 0.2);
+}
+
+.ui-table__row--danger {
+    background: rgba(220, 53, 69, 0.15);
+}
+
+.ui-table__row--danger:hover {
+    background: rgba(220, 53, 69, 0.2);
+}
+
+.ui-table__row--info {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.ui-table__row--info:hover {
+    background: rgba(102, 126, 234, 0.15);
+}
+
+/* ===================
+   單元格
+   =================== */
+
+.ui-table__cell {
+    padding: var(--spacing-3, 12px);
+    border: 1px solid var(--color-border, #ddd);
+    vertical-align: middle;
+}
+
+/* 表頭單元格 */
+.ui-table__header {
+    padding: var(--spacing-3, 12px);
+    border: 1px solid var(--color-border, #ddd);
+    font-weight: 600;
+    text-align: left;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.ui-table__header--center {
+    text-align: center;
+}
+
+/* 單元格修飾器 */
+.ui-table__cell--center {
+    text-align: center;
+}
+
+.ui-table__cell--right {
+    text-align: right;
+}
+
+.ui-table__cell--indent {
+    padding-left: var(--spacing-5, 20px);
+}
+
+.ui-table__cell--bold {
+    font-weight: 600;
+}
+
+.ui-table__cell--points {
+    text-align: center;
+    font-weight: 600;
+    width: 100px;
+}
+
+.ui-table__cell--score {
+    text-align: center;
+    font-weight: 600;
+    width: 80px;
+}
+
+/* ===================
+   表格容器
+   =================== */
+
+.ui-table-wrapper,
+.ui-table-container {
+    overflow-x: auto;
+    margin-top: var(--spacing-3, 12px);
+    border-radius: var(--radius-md, 8px);
+    border: 1px solid var(--color-border, #ddd);
+}
+
+.ui-table-wrapper--shadow {
+    box-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.1));
+}
+
+/* ===================
+   評分標準表格
+   =================== */
+
+.ui-scoring-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-3, 12px);
+}
+
+.ui-scoring-table__header {
+    padding: var(--spacing-3, 12px);
+    border: 1px solid var(--color-border, #ddd);
+    font-weight: 600;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.ui-scoring-table__header--criteria {
+    text-align: left;
+}
+
+.ui-scoring-table__header--points {
+    text-align: center;
+    width: 100px;
+}
+
+.ui-scoring-table__category {
+    background: rgba(102, 126, 234, 0.15);
+}
+
+.ui-scoring-table__category td {
+    padding: var(--spacing-3, 12px);
+    border: 1px solid var(--color-border, #ddd);
+    font-weight: 600;
+    color: #333;
+}
+
+.ui-scoring-table__item {
+    transition: background-color 0.2s ease;
+}
+
+.ui-scoring-table__item:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+.ui-scoring-table__criteria {
+    padding: var(--spacing-3, 12px) var(--spacing-3, 12px) var(--spacing-3, 12px) var(--spacing-5, 20px);
+    border: 1px solid var(--color-border, #ddd);
+}
+
+.ui-scoring-table__points {
+    padding: var(--spacing-3, 12px);
+    border: 1px solid var(--color-border, #ddd);
+    text-align: center;
+    font-weight: 600;
+}
+
+/* ===================
+   解釋表格
+   =================== */
+
+.ui-interpretation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-3, 12px);
+}
+
+.ui-interpretation-table__header {
+    padding: var(--spacing-3, 12px);
+    border: 1px solid var(--color-border, #ddd);
+    font-weight: 600;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.ui-interpretation-table__row {
+    transition: background-color 0.2s ease;
+}
+
+.ui-interpretation-table__row--success {
+    background: rgba(40, 167, 69, 0.15);
+}
+
+.ui-interpretation-table__row--warning {
+    background: rgba(255, 193, 7, 0.15);
+}
+
+.ui-interpretation-table__row--danger {
+    background: rgba(220, 53, 69, 0.15);
+}
+
+.ui-interpretation-table__cell {
+    padding: var(--spacing-3, 12px);
+    border: 1px solid var(--color-border, #ddd);
+}
+
+.ui-interpretation-table__score {
+    text-align: center;
+    font-weight: 600;
+}
+
+/* ===================
+   Reference Table 
+   (Used by uiBuilder.createTable with .reference-table class)
+   =================== */
+
+.reference-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e1e8ed;
+}
+
+.reference-table td {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.reference-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Alert Colors in Table Cells matching ui-alert classes */
+td .ui-alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+td .ui-alert-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+td .ui-alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+td .ui-alert-info {
+    background-color: #cff4fc;
+    color: #055160;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Stick Column Support */
+.ui-table.has-sticky-col th:first-child,
+.ui-table.has-sticky-col td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #fff;
+    z-index: 1;
+    border-right: 2px solid #e1e8ed;
+}
+
+.ui-table.has-sticky-col th:first-child {
+    background-color: #f8f9fa;
+    z-index: 2;
+}
+
+
+/* ===================
+   深色主題覆蓋
+   =================== */
+
+[data-theme="dark"] .ui-table__cell,
+[data-theme="dark"] .ui-table__header,
+[data-theme="dark"] .ui-table th,
+[data-theme="dark"] .ui-table td,
+[data-theme="dark"] .ui-table-wrapper,
+[data-theme="dark"] .ui-table-container,
+[data-theme="dark"] .ui-scoring-table__header,
+[data-theme="dark"] .ui-scoring-table__points,
+[data-theme="dark"] .ui-scoring-table__criteria,
+[data-theme="dark"] .ui-scoring-table__category td,
+[data-theme="dark"] .ui-interpretation-table__cell,
+[data-theme="dark"] .ui-interpretation-table__header {
+    border-color: var(--color-border-dark, #444);
+}
+
+[data-theme="dark"] .ui-table__row--header,
+[data-theme="dark"] .ui-table__header,
+[data-theme="dark"] .ui-table th,
+[data-theme="dark"] .ui-scoring-table__header,
+[data-theme="dark"] .ui-interpretation-table__header {
+    background: rgba(102, 126, 234, 0.2);
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .ui-table__row--category,
+[data-theme="dark"] .ui-scoring-table__category {
+    background: rgba(102, 126, 234, 0.25);
+}
+
+[data-theme="dark"] .ui-table__row--category .ui-table__cell,
+[data-theme="dark"] .ui-scoring-table__category td {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .reference-table th {
+    background: rgba(102, 126, 234, 0.2);
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .ui-table td {
+    color: #dadada;
+}

@@ -1,0 +1,49 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: 🛡️ Build, Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: 📦 Install dependencies
+      run: npm ci
+
+    - name: 🎨 Check Formatting
+      run: npm run format:check
+
+    - name: 🔍 Lint Code
+      run: npm run lint
+
+    - name: 🔨 TypeScript Build
+      # 編譯 TypeScript 確保沒有型別錯誤
+      run: npm run build:ts
+
+    - name: 🧹 Artifact Check
+      # 確保編譯後的檔案 (.js) 沒有被錯誤地提交到版本控制中
+      run: |
+        if git ls-files --error-unmatch js/calculators/**/*.js > /dev/null 2>&1; then
+          echo "❌ Error: js/calculators/ 目錄下的編譯檔案被 Git 追蹤了。請將其移除並加入 .gitignore。"
+          exit 1
+        fi
+        echo "✅ No compiled artifacts tracked in git."
+
+    - name: 🧪 Run Tests
+      # 執行測試 (包含新的 Smoke Test)
+      run: npm test

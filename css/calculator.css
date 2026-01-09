@@ -1,0 +1,211 @@
+/* ===================================
+   Calculator Components
+   =================================== */
+
+/* Calculator Grid */
+.calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Calculator Card */
+.calculator-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.calculator-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.calculator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.calculator-card:hover::before {
+    transform: scaleX(1);
+}
+
+.calculator-card h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.calculator-card p {
+    color: #718096;
+    margin: 10px 0 0 0;
+    font-size: 0.85em;
+    line-height: 1.5;
+}
+
+/* Calculator Content */
+.calculator-content {
+    margin-top: 20px;
+}
+
+/* Description */
+.description {
+    color: #718096;
+    margin-bottom: 25px;
+    font-size: 0.85em;
+    line-height: 1.6;
+    padding: 15px;
+    background: rgba(102, 126, 234, 0.03);
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+/* Description inside calculator-header should be white */
+/* Uses multiple class selectors for higher specificity */
+.calculator-header .description,
+.calculator-header p.description {
+    color: white;
+    -webkit-text-fill-color: white;
+    background: transparent;
+    border: none;
+    opacity: 0.95;
+    padding: 0;
+}
+
+/* Results Display */
+.result {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 16px;
+    border: 2px solid rgba(102, 126, 234, 0.1);
+    display: none;
+    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result.calculated {
+    display: block;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 15px 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.result-item .value {
+    font-size: 1.8em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-item .label {
+    font-size: 0.85em;
+    color: #718096;
+    font-weight: 600;
+    text-align: right;
+}
+
+.result-item .unit {
+    font-size: 0.6em;
+    color: #a0aec0;
+    font-weight: 400;
+}
+
+/* Formula Section */
+.formula-section {
+    margin-top: 40px;
+    padding: 25px;
+    background: rgba(241, 245, 249, 0.5);
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.formula-section h4 {
+    color: #2d3748;
+    margin-top: 0;
+    font-size: 1.1em;
+}
+
+.formula-item {
+    margin: 15px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.formula {
+    font-family: 'Courier New', Courier, monospace;
+    background: #f7fafc;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
+    overflow-x: auto;
+}
+
+/* Error & Warning Messages */
+.error-message {
+    background: #fee;
+    border-left: 4px solid #d32f2f;
+    color: #d32f2f;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    line-height: 1.4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.warning-message {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    color: #856404;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+

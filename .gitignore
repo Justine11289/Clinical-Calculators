@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+# package-lock.json should be committed for consistency
+
+# Testing
+coverage/
+.nyc_output/
+*.log
+
+# Build output
+dist/
+build/
+*.min.js
+*.min.css
+
+# ===================
+# TypeScript 編譯產物
+# ===================
+
+# js/calculators 目錄中的編譯產物
+js/calculators/**/*.js
+js/calculators/**/*.d.ts
+js/calculators/**/*.js.map
+js/calculators/**/*.d.ts.map
+
+# js/ 根目錄的自動生成檔案
+js/*.d.ts
+js/*.d.ts.map
+js/*.js.map
+
+# 注意：以下檔案需要保留，不能忽略：
+# - src/*.d.ts (手動編寫的類型宣告)
+# - src/calculators/**/calculation.js (輔助計算檔案)
+# - src/calculators/**/cdc-data.js (資料檔案)
+
+# 保留特定的 JavaScript 輔助檔案
+!js/calculators/**/calculation.js
+!js/calculators/**/cdc-data.js
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.bak

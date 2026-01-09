@@ -1,0 +1,202 @@
+/* =============================================
+   Buttons - 按鈕組件樣式
+   ============================================= */
+
+/* ===================
+   Base Button
+   =================== */
+
+.btn,
+.ui-btn,
+button[type="submit"],
+button[type="button"],
+.ui-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    
+    height: var(--button-height);
+    padding: var(--button-padding-y) var(--button-padding-x);
+    
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    
+    background: var(--gradient-primary);
+    color: var(--color-text-white);
+    border: none;
+    border-radius: var(--radius-lg);
+    
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:hover,
+.ui-btn:hover,
+button[type="submit"]:hover,
+button[type="button"]:hover,
+.ui-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.btn:active,
+.ui-btn:active,
+button[type="submit"]:active,
+button[type="button"]:active,
+.ui-button:active {
+    transform: translateY(0);
+}
+
+.btn:disabled,
+button:disabled,
+.ui-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===================
+   Button Variants
+   =================== */
+
+/* Primary */
+.btn-primary,
+.ui-btn-primary,
+.ui-button-primary {
+    background: var(--gradient-primary);
+    color: var(--color-text-white);
+}
+
+/* Secondary */
+.btn-secondary,
+.ui-btn-secondary,
+.ui-button-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover,
+.ui-btn-secondary:hover,
+.ui-button-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-text-white);
+}
+
+/* Success */
+.btn-success,
+.ui-btn-success,
+.ui-button-success {
+    background: var(--color-success);
+    color: var(--color-text-white);
+}
+
+/* Danger */
+.btn-danger,
+.ui-btn-danger,
+.ui-button-danger {
+    background: var(--color-danger);
+    color: var(--color-text-white);
+}
+
+/* Ghost */
+.btn-ghost,
+.ui-btn-ghost,
+.ui-button-ghost {
+    background: transparent;
+    color: var(--color-primary);
+    box-shadow: none;
+}
+
+.btn-ghost:hover,
+.ui-btn-ghost:hover,
+.ui-button-ghost:hover {
+    background: var(--color-bg-hover);
+    box-shadow: none;
+}
+
+/* ===================
+   Block Button (Full Width)
+   =================== */
+
+.btn-block,
+.ui-btn-block {
+    display: flex;
+    width: 100%;
+}
+
+/* ===================
+   Button Sizes
+   =================== */
+
+.btn-sm {
+    height: 36px;
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-sm);
+}
+
+.btn-lg {
+    height: 56px;
+    padding: var(--spacing-4) var(--spacing-8);
+    font-size: var(--font-size-lg);
+}
+
+/* ===================
+   Button Groups
+   =================== */
+
+.btn-group,
+.ui-button-group {
+    display: flex;
+    gap: var(--spacing-3);
+    flex-wrap: wrap;
+}
+
+.btn-group-vertical {
+    flex-direction: column;
+}
+
+/* ===================
+   Icon Buttons
+   =================== */
+
+.btn-icon {
+    width: var(--button-height);
+    height: var(--button-height);
+    padding: 0;
+    border-radius: var(--radius-full);
+}
+
+.btn-icon svg,
+.btn-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===================
+   Calculate Button (Special)
+   =================== */
+
+.calculate-btn,
+#calculate-btn {
+    width: 100%;
+    height: 56px;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin-top: var(--spacing-6);
+    background: var(--gradient-primary);
+    border-radius: var(--radius-xl);
+}
+
+.calculate-btn:hover,
+#calculate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+

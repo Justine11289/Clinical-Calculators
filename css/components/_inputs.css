@@ -1,0 +1,282 @@
+/* =============================================
+   Inputs - 輸入組件樣式
+   ============================================= */
+
+/* ===================
+   Input Group
+   =================== */
+
+.input-group,
+.ui-input-group {
+    margin-bottom: var(--spacing-5);
+}
+
+.input-group label,
+.ui-input-group label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-2);
+    font-size: var(--font-size-base);
+}
+
+/* ===================
+   Input Wrapper
+   =================== */
+
+.input-wrapper,
+.ui-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* ===================
+   Base Input Styles
+   =================== */
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="search"],
+textarea,
+select,
+.ui-input,
+.ui-select {
+    width: 100%;
+    height: var(--input-height);
+    padding: var(--input-padding-y) var(--input-padding-x);
+    
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    color: var(--color-text-primary);
+    
+    background: var(--color-bg-input);
+    border: var(--input-border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    
+    transition: all var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.ui-input:focus,
+.ui-select:focus {
+    outline: none;
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled,
+.ui-input:disabled,
+.ui-select:disabled {
+    background: var(--color-bg-hover);
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+/* ===================
+   Textarea
+   =================== */
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ===================
+   Select
+   =================== */
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-4) center;
+    padding-right: var(--spacing-10);
+}
+
+/* ===================
+   Input with Unit
+   =================== */
+
+.input-with-unit,
+.ui-input-wrapper {
+    position: relative;
+}
+
+.input-unit,
+.ui-input-unit {
+    position: absolute;
+    right: var(--spacing-4);
+    top: 50%;
+    transform: translateY(-50%);
+    
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    pointer-events: none;
+}
+
+.input-with-unit input,
+.ui-input-wrapper input {
+    padding-right: calc(var(--spacing-8) + 40px);
+}
+
+/* ===================
+   Help Text
+   =================== */
+
+.help-text,
+.input-hint {
+    display: block;
+    margin-top: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* ===================
+   Required Mark
+   =================== */
+
+.required {
+    color: var(--color-danger);
+    margin-left: var(--spacing-1);
+}
+
+/* ===================
+   Input States
+   =================== */
+
+.input-error input,
+.has-error input {
+    border-color: var(--color-danger);
+}
+
+.input-error input:focus,
+.has-error input:focus {
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.15);
+}
+
+.input-success input,
+.has-success input {
+    border-color: var(--color-success);
+}
+
+.error-message {
+    color: var(--color-danger);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-2);
+}
+
+/* ===================
+   Validation States (MDCalc-style)
+   紅區 (Error) - 阻擋計算
+   黃區 (Warning) - 允許計算但警告
+   =================== */
+
+/* 紅區 - 錯誤狀態 */
+input.validation-error,
+.validation-error input {
+    border-color: #ef5350 !important;
+    background-color: rgba(239, 83, 80, 0.05);
+}
+
+input.validation-error:focus,
+.validation-error input:focus {
+    box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.2);
+}
+
+/* 黃區 - 警告狀態 */
+input.validation-warning,
+.validation-warning input {
+    border-color: #ffb74d !important;
+    background-color: rgba(255, 183, 77, 0.05);
+}
+
+input.validation-warning:focus,
+.validation-warning input:focus {
+    box-shadow: 0 0 0 3px rgba(255, 183, 77, 0.2);
+}
+
+/* 驗證訊息框 */
+.validation-message {
+    margin-top: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 紅區訊息 */
+.validation-message.error {
+    background: #ffebee;
+    border: 1px solid #ef5350;
+    color: #c62828;
+}
+
+/* 黃區訊息 */
+.validation-message.warning {
+    background: #fff8e1;
+    border: 1px solid #ffb74d;
+    color: #e65100;
+}
+
+/* ===================
+   Range Slider
+   =================== */
+
+input[type="range"],
+.ui-range-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--color-border);
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.ui-range-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.ui-range-value {
+    min-width: 60px;
+    text-align: right;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+

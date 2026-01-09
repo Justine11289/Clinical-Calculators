@@ -1,0 +1,183 @@
+/* =============================================
+   Base Styles - 基礎元素樣式
+   ============================================= */
+
+/* ===================
+   Body
+   =================== */
+
+body {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    background: var(--color-bg-body);
+    background-attachment: fixed;
+    padding: var(--spacing-5);
+}
+
+/* ===================
+   Typography
+   =================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-4);
+}
+
+/* Main page headings with gradient effect */
+h1 {
+    font-size: var(--font-size-4xl);
+    background: var(--heading-background);
+    -webkit-background-clip: var(--heading-webkit-background-clip);
+    -webkit-text-fill-color: var(--heading-text-fill-color);
+    background-clip: text;
+    color: var(--heading-color);
+    text-shadow: var(--heading-text-shadow);
+    text-align: center;
+}
+
+h2 {
+    font-size: var(--font-size-3xl);
+    background: var(--heading-background);
+    -webkit-background-clip: var(--heading-webkit-background-clip);
+    -webkit-text-fill-color: var(--heading-text-fill-color);
+    background-clip: text;
+    color: var(--heading-color);
+    text-shadow: var(--heading-text-shadow);
+    margin-top: var(--spacing-8);
+}
+
+h3 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-text-primary);
+}
+
+h4 {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+}
+
+/* Reset gradient text for component contexts */
+.info-section h4,
+.formula-box h4,
+.formula-section h4,
+.data-table th,
+.ui-section h4 {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: var(--heading-solid-text-fill);
+    color: var(--heading-solid-color);
+}
+
+/* Ensure white text in gradient headers */
+.calculator-header h3,
+.calculator-header h4 {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: var(--color-text-white);
+    color: var(--color-text-white);
+}
+
+p {
+    margin-bottom: var(--spacing-4);
+}
+
+strong,
+b {
+    font-weight: var(--font-weight-semibold);
+}
+
+small {
+    font-size: var(--font-size-sm);
+}
+
+/* ===================
+   Links
+   =================== */
+
+a {
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ===================
+   Lists
+   =================== */
+
+ul,
+ol {
+    padding-left: var(--spacing-6);
+    margin-bottom: var(--spacing-4);
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+li {
+    margin-bottom: var(--spacing-2);
+}
+
+/* ===================
+   Code
+   =================== */
+
+code,
+pre {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+}
+
+code {
+    background: var(--color-bg-hover);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--radius-sm);
+}
+
+pre {
+    background: var(--color-bg-card);
+    padding: var(--spacing-4);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ===================
+   Horizontal Rule
+   =================== */
+
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-6) 0;
+}
+
+/* ===================
+   Selection
+   =================== */
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-text-white);
+}
