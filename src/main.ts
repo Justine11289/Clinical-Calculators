@@ -332,6 +332,7 @@ window.onload = () => {
 
     // ========== Search Function ==========
     searchBar.addEventListener('input', updateDisplay);
+    
 
     // ========== Sort Function ==========
     sortSelect.addEventListener('change', (e: Event) => {
