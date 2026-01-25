@@ -70,7 +70,7 @@ window.onload = () => {
             // 修正：路徑改為 './test-Patient.json'
             const response = await fetch('./test-Patient.json');
             if (!response.ok) throw new Error('無法讀取測試資料檔案');
-            
+
             const bundle = await response.json();
             const patient = bundle.entry.find(
                 (e: any) => e.resource.resourceType === 'Patient'
