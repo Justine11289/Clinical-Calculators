@@ -1,10 +1,9 @@
-// src/calculators/index.ts
-
 export interface CalculatorMetadata {
     id: string;
     title: string;
-    category: string;
+    category?: string;
     description?: string;
+    render?: (container: HTMLElement, client: any) => void; 
 }
 
 export interface CalculatorModule {
