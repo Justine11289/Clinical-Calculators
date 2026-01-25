@@ -16,7 +16,7 @@ declare global {
 }
 
 // 快取版本號
-window.CACHE_VERSION = '1.1.1';
+window.CACHE_VERSION = '1.s1.1';
 
 /**
  * 顯示載入中狀態
@@ -68,7 +68,7 @@ window.onload = () => {
             card.innerHTML = calculator.generateHTML();
 
             // 2. 讀取測試資料
-            const response = await fetch('/test-Patient.json');
+            const response = await fetch('./test-Patient.json');
             const bundle = await response.json();
             const patient = bundle.entry.find(
                 (e: any) => e.resource.resourceType === 'Patient'

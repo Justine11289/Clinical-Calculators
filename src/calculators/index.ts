@@ -253,28 +253,19 @@ export const calculatorModules: CalculatorMetadata[] = [
  * @returns The calculator module
  */
 // src/calculators/index.ts
-// 修改 src/calculators/index.ts
 export async function loadCalculator(calculatorId: string): Promise<CalculatorModule> {
     try {
         const version = Date.now();
-        // 動態載入編譯後的 JavaScript
-        const module = await import(`/js/calculators/${calculatorId}/index.js?v=${version}`);
+        // 修正：移除最前面的 /，讓路徑變成相對的
+        const module = await import(`./calculators/${calculatorId}/index.js?v=${version}`);
 
-        // 1. 優先嘗試取 default 匯出
-        if (module.default) {
-            return module.default;
-        }
+        if (module.default) return module.default;
 
-        // 2. 若無 default，遍歷所有匯出項，尋找第一個具有 generateHTML 方法的物件
         const calculator = Object.values(module).find(
             (val: any) => val && typeof val.generateHTML === 'function'
         );
 
-        if (!calculator) {
-            console.error(`在模組中找不到有效的計算器物件: ${calculatorId}`, module);
-            throw new Error(`Invalid calculator module structure: ${calculatorId}`);
-        }
-
+        if (!calculator) throw new Error(`Invalid structure: ${calculatorId}`);
         return calculator as CalculatorModule;
     } catch (error) {
         console.error(`載入計算器失敗: ${calculatorId}`, error);

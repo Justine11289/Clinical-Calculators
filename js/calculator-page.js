@@ -3,7 +3,7 @@ import { displayPatientInfo } from './utils.js';
 import { loadCalculator, getCalculatorMetadata } from './calculators/index.js';
 import { favoritesManager } from './favorites.js';
 // 快取版本號
-window.CACHE_VERSION = '1.1.1';
+window.CACHE_VERSION = '1.s1.1';
 /**
  * 顯示載入中狀態
  */
@@ -46,7 +46,7 @@ window.onload = () => {
             const calculator = await loadCalculator(calculatorId);
             card.innerHTML = calculator.generateHTML();
             // 2. 讀取測試資料
-            const response = await fetch('/test-Patient.json');
+            const response = await fetch('./test-Patient.json');
             const bundle = await response.json();
             const patient = bundle.entry.find((e) => e.resource.resourceType === 'Patient')?.resource;
             // 核心修正：將 patient.id 傳入 mockClient 滿足 utils.ts 的檢查
