@@ -222,11 +222,11 @@ export const calculatorModules = [
  * @returns The calculator module
  */
 // src/calculators/index.ts
+// src/calculators/index.ts
 export async function loadCalculator(calculatorId) {
     try {
         const version = Date.now();
-        // 修正：移除最前面的 /，讓路徑變成相對的
-        const module = await import(`./calculators/${calculatorId}/index.js?v=${version}`);
+        const module = await import(`./js/calculators/${calculatorId}/index.js?v=${version}`);
         if (module.default)
             return module.default;
         const calculator = Object.values(module).find((val) => val && typeof val.generateHTML === 'function');
