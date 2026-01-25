@@ -3,7 +3,7 @@ export interface CalculatorMetadata {
     title: string;
     category?: string;
     description?: string;
-    render?: (container: HTMLElement, client: any) => void; 
+    render?: (container: HTMLElement, client: any) => void;
 }
 
 export interface CalculatorModule {
