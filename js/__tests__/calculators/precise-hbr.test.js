@@ -261,8 +261,8 @@ describe('PRECISE-HBR Score Calculator', () => {
                 'precise-hbr-egfr': 90
             });
             const getRadioValue = createGetRadioValue({
-                'prior_bleeding': '0',
-                'oral_anticoagulation': '0'
+                prior_bleeding: '0',
+                oral_anticoagulation: '0'
             });
             const result = preciseHbrCalculation(getValue, mockGetStdValue, getRadioValue);
             expect(result).not.toBeNull();
@@ -278,8 +278,8 @@ describe('PRECISE-HBR Score Calculator', () => {
                 'precise-hbr-egfr': 70
             });
             const getRadioValue = createGetRadioValue({
-                'prior_bleeding': '1',
-                'oral_anticoagulation': '0'
+                prior_bleeding: '1',
+                oral_anticoagulation: '0'
             });
             const result = preciseHbrCalculation(getValue, mockGetStdValue, getRadioValue);
             expect(result).not.toBeNull();
@@ -296,8 +296,8 @@ describe('PRECISE-HBR Score Calculator', () => {
                 'precise-hbr-egfr': 40
             });
             const getRadioValue = createGetRadioValue({
-                'prior_bleeding': '1',
-                'oral_anticoagulation': '0'
+                prior_bleeding: '1',
+                oral_anticoagulation: '0'
             });
             const result = preciseHbrCalculation(getValue, mockGetStdValue, getRadioValue);
             expect(result).not.toBeNull();
@@ -315,8 +315,8 @@ describe('PRECISE-HBR Score Calculator', () => {
                 'precise-hbr-egfr': 20
             });
             const getRadioValue = createGetRadioValue({
-                'prior_bleeding': '1',
-                'oral_anticoagulation': '1'
+                prior_bleeding: '1',
+                oral_anticoagulation: '1'
             });
             const result = preciseHbrCalculation(getValue, mockGetStdValue, getRadioValue);
             expect(result).not.toBeNull();
@@ -335,9 +335,9 @@ describe('PRECISE-HBR Score Calculator', () => {
                 'precise-hbr-egfr': 5
             });
             const getRadioValue = createGetRadioValue({
-                'prior_bleeding': '1',
-                'oral_anticoagulation': '1',
-                'arc_hbr_plt': '1'
+                prior_bleeding: '1',
+                oral_anticoagulation: '1',
+                arc_hbr_plt: '1'
             });
             const result = preciseHbrCalculation(getValue, mockGetStdValue, getRadioValue);
             expect(result).not.toBeNull();
@@ -356,10 +356,12 @@ describe('PRECISE-HBR Score Calculator', () => {
             // No ARC-HBR factors
             const noArc = preciseHbrCalculation(getValue, mockGetStdValue, createGetRadioValue({}));
             // With one ARC-HBR factor
-            const withArc = preciseHbrCalculation(getValue, mockGetStdValue, createGetRadioValue({ 'arc_hbr_cirrhosis': '1' }));
+            const withArc = preciseHbrCalculation(getValue, mockGetStdValue, createGetRadioValue({ arc_hbr_cirrhosis: '1' }));
             const withArcScore = withArc?.score;
             const noArcScore = noArc?.score;
-            expect(withArcScore !== undefined && noArcScore !== undefined ? withArcScore - noArcScore : null).toBe(3);
+            expect(withArcScore !== undefined && noArcScore !== undefined
+                ? withArcScore - noArcScore
+                : null).toBe(3);
         });
         test('Multiple ARC-HBR factors still add only 3 points', () => {
             const getValue = createGetValue({
@@ -369,15 +371,15 @@ describe('PRECISE-HBR Score Calculator', () => {
                 'precise-hbr-egfr': 90
             });
             // One ARC-HBR factor
-            const oneArc = preciseHbrCalculation(getValue, mockGetStdValue, createGetRadioValue({ 'arc_hbr_plt': '1' }));
+            const oneArc = preciseHbrCalculation(getValue, mockGetStdValue, createGetRadioValue({ arc_hbr_plt: '1' }));
             // Multiple ARC-HBR factors
             const multiArc = preciseHbrCalculation(getValue, mockGetStdValue, createGetRadioValue({
-                'arc_hbr_plt': '1',
-                'arc_hbr_diathesis': '1',
-                'arc_hbr_cirrhosis': '1',
-                'arc_hbr_malignancy': '1',
-                'arc_hbr_surgery': '1',
-                'arc_hbr_nsaids': '1'
+                arc_hbr_plt: '1',
+                arc_hbr_diathesis: '1',
+                arc_hbr_cirrhosis: '1',
+                arc_hbr_malignancy: '1',
+                arc_hbr_surgery: '1',
+                arc_hbr_nsaids: '1'
             }));
             // Multiple factors still only add 3 points (boolean OR)
             expect(multiArc.score).toBe(oneArc.score);

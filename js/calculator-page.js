@@ -48,7 +48,7 @@ window.onload = () => {
             // 2. 讀取測試資料
             const response = await fetch('/test-Patient.json');
             const bundle = await response.json();
-            const patient = bundle.entry.find((e) => e.resource.resourceType === "Patient")?.resource;
+            const patient = bundle.entry.find((e) => e.resource.resourceType === 'Patient')?.resource;
             // 核心修正：將 patient.id 傳入 mockClient 滿足 utils.ts 的檢查
             const mockClient = {
                 patient: {

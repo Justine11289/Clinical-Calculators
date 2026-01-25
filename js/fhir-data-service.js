@@ -594,7 +594,7 @@ export class FHIRDataService {
         };
     }
     getPatientNationalId(patient) {
-        const twId = patient.identifier?.find((id) => id.system === "http://www.moi.gov.tw/");
+        const twId = patient.identifier?.find((id) => id.system === 'http://www.moi.gov.tw/');
         return twId ? twId.value : null;
     }
 }

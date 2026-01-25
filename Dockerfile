@@ -13,7 +13,6 @@ WORKDIR /usr/share/nginx/html
 # 清除 Nginx 預設檔案
 RUN rm -rf ./*
 
-# 修正點：使用 *.html 確保 index.html, launch.html, calculator.html 全部被帶入
 COPY --from=builder /app/*.html ./
 COPY --from=builder /app/test-Patient.json .
 COPY --from=builder /app/js ./js

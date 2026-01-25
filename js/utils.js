@@ -71,9 +71,10 @@ export function displayPatientInfo(client, patientInfoDiv) {
         const formattedName = name.text || `${name.given?.join(' ') || ''} ${name.family || ''}`.trim();
         const age = calculateAge(patient.birthDate);
         // 檢查是否符合 TW Core Patient Profile
-        const isTWCore = patient.meta?.profile?.some((p) => p.includes("twcore/StructureDefinition/Patient-twcore"));
+        const isTWCore = patient.meta?.profile?.some((p) => p.includes('twcore/StructureDefinition/Patient-twcore'));
         // 取得台灣身分證字號
-        const twId = patient.identifier?.find((i) => i.system === "http://www.moi.gov.tw/")?.value || "N/A";
+        const twId = patient.identifier?.find((i) => i.system === 'http://www.moi.gov.tw/')?.value ||
+            'N/A';
         patientInfoDiv.innerHTML = `
             <div class="tw-core-info">
                 ${isTWCore ? '<span class="badge-twcore">✓ TW Core IG Verified</span>' : ''}
