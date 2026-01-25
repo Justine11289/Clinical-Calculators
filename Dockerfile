@@ -4,13 +4,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npx tsc
+RUN npm run build:ts  # 建議改用 package.json 裡的指令
 
 # 階段 2: 運行 Nginx
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
+# 修正：複製所有必要的 HTML 檔案
 COPY --from=builder /app/index.html .
+COPY --from=builder /app/launch.html . 
 COPY --from=builder /app/calculator.html .
 COPY --from=builder /app/test-Patient.json .
 COPY --from=builder /app/js ./js
