@@ -1,20 +1,18 @@
-import { calculatorModules, CalculatorMetadata } from './calculators/index.js';
+import { calculatorModules } from './calculators/index.js';
 import { displayPatientInfo } from './utils.js';
 
 window.onload = async () => {
     const patientInfoDiv = document.getElementById('patient-info') as HTMLElement;
     const calculatorContainer = document.getElementById('calculator-container') as HTMLElement;
 
-    // 1. 從網址取得計算機 ID
     const urlParams = new URLSearchParams(window.location.search);
-    const calcId = urlParams.get('id'); // 確保 main.ts 傳過來的是 id
+    const calcId = urlParams.get('id');
 
     if (!calcId) {
         if (calculatorContainer) calculatorContainer.innerHTML = '<h1>錯誤：未指定計算機 ID</h1>';
         return;
     }
 
-    // 2. 尋找對應的計算機模組
     const calcMetadata = calculatorModules.find(m => m.id === calcId);
     if (!calcMetadata) {
         if (calculatorContainer)
@@ -22,34 +20,35 @@ window.onload = async () => {
         return;
     }
 
-    /**
-     * 核心：資料載入邏輯
-     */
     async function initializeCalculator() {
         try {
-            console.log('嘗試初始化 SMART 環境...');
-            let client;
-            const response = await fetch('./test-Patient.json');
-            const bundle = (await response.json()) as any;
-            const patient = bundle.entry.find(
-                (e: any) => e.resource.resourceType === 'Patient'
-            ).resource;
+            // 修正：使用 const 配合立即執行函式，避免 Lint 報錯 'prefer-const'
+            const client = await (async () => {
+                // 確保路徑指向根目錄的 test-Patient.json
+                const response = await fetch('./test-Patient.json');
+                const bundle = await response.json();
 
-            // 模擬 mockClient
-            client = {
-                patient: { id: patient.id, read: () => Promise.resolve(patient) },
-                request: async () => bundle,
-                user: { read: () => Promise.reject('測試模式') }
-            };
+                // 從 Bundle 中尋找病人資源
+                const patientEntry = bundle.entry.find(
+                    (ent: any) => ent.resource.resourceType === 'Patient'
+                );
+                const patient = patientEntry.resource;
 
-            if (client) {
-                // 顯示病人資訊
+                return {
+                    patient: { id: patient.id, read: () => Promise.resolve(patient) },
+                    request: async () => bundle,
+                    user: { read: () => Promise.reject('測試模式') }
+                };
+            })();
+
+            if (client && patientInfoDiv) {
                 displayPatientInfo(client, patientInfoDiv);
             }
         } catch (error) {
             console.error('初始化失敗:', error);
-            if (patientInfoDiv)
-                patientInfoDiv.innerHTML = '無法載入病人資料，請檢查 test-Patient.json';
+            if (patientInfoDiv) {
+                patientInfoDiv.innerHTML = `<b style="color:red">無法載入資料，請確認 test-Patient.json 是否存在。</b>`;
+            }
         }
     }
 
