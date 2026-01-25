@@ -1,34 +1,5 @@
-export interface CalculatorMetadata {
-    id: string;
-    title: string;
-    category?: string;
-    description?: string;
-    render?: (container: HTMLElement, client: any) => void;
-}
-
-export interface CalculatorModule {
-    generateHTML: () => string;
-    initialize?: (client: any, patient: any, container: HTMLElement) => void;
-}
-
-export type CategoryKey =
-    | 'cardiovascular'
-    | 'renal'
-    | 'critical-care'
-    | 'pediatric'
-    | 'drug-conversion'
-    | 'infection'
-    | 'neurology'
-    | 'respiratory'
-    | 'metabolic'
-    | 'hematology'
-    | 'gastroenterology'
-    | 'obstetrics'
-    | 'psychiatry'
-    | 'general';
-
 // Calculator categories
-export const categories: Record<CategoryKey, string> = {
+export const categories = {
     cardiovascular: 'Cardiovascular',
     renal: 'Renal',
     'critical-care': 'Critical Care',
@@ -44,8 +15,7 @@ export const categories: Record<CategoryKey, string> = {
     psychiatry: 'Psychiatry',
     general: 'General Medicine'
 };
-
-export const calculatorModules: CalculatorMetadata[] = [
+export const calculatorModules = [
     { id: '2helps2b', title: '2HELPS2B Score for Seizure Risk', category: 'neurology' },
     { id: '4as-delirium', title: "4 A's Test for Delirium", category: 'neurology' },
     { id: '4c-mortality-covid', title: '4C Mortality Score for COVID-19', category: 'infection' },
@@ -246,58 +216,51 @@ export const calculatorModules: CalculatorMetadata[] = [
     { id: 'wells-dvt', title: 'Wells Criteria for DVT', category: 'cardiovascular' },
     { id: 'wells-pe', title: 'Wells Criteria for PE', category: 'cardiovascular' }
 ].sort((a, b) => a.title.localeCompare(b.title));
-
 /**
  * Dynamically load a calculator module
  * @param calculatorId - The calculator ID
  * @returns The calculator module
  */
-
-export async function loadCalculator(calculatorId: string): Promise<CalculatorModule> {
+// src/calculators/index.ts
+// src/calculators/index.ts
+export async function loadCalculator(calculatorId) {
     try {
         const version = Date.now();
-        // 修正：因為 index.js 已經在 js/calculators 裡了
-        // 直接指向子資料夾即可，不要再寫一次 js/calculators
-        const module = await import(`./${calculatorId}/index.js?v=${version}`);
-
-        if (module.default) return module.default;
-
-        const calculator = Object.values(module).find(
-            (val: any) => val && typeof val.generateHTML === 'function'
-        );
-
-        if (!calculator) throw new Error(`Invalid structure: ${calculatorId}`);
-        return calculator as CalculatorModule;
-    } catch (error) {
+        const module = await import(`./js/calculators/${calculatorId}/index.js?v=${version}`);
+        if (module.default)
+            return module.default;
+        const calculator = Object.values(module).find((val) => val && typeof val.generateHTML === 'function');
+        if (!calculator)
+            throw new Error(`Invalid structure: ${calculatorId}`);
+        return calculator;
+    }
+    catch (error) {
         console.error(`載入計算器失敗: ${calculatorId}`, error);
         throw error;
     }
 }
-
 /**
  * Check if a calculator module exists
  * @param calculatorId - The calculator ID
  * @returns Whether the calculator exists
  */
-export function calculatorExists(calculatorId: string): boolean {
+export function calculatorExists(calculatorId) {
     return calculatorModules.some(calc => calc.id === calculatorId);
 }
-
 /**
  * Get calculator metadata by ID
  * @param calculatorId - The calculator ID
  * @returns Calculator metadata or null
  */
-export function getCalculatorMetadata(calculatorId: string): CalculatorMetadata | null {
+export function getCalculatorMetadata(calculatorId) {
     return calculatorModules.find(calc => calc.id === calculatorId) || null;
 }
-
 /**
  * Get calculators by category
  * @param category - The category name
  * @returns Array of calculator metadata
  */
-export function getCalculatorsByCategory(category: string): CalculatorMetadata[] {
+export function getCalculatorsByCategory(category) {
     if (category === 'all' || !category) {
         return calculatorModules;
     }
