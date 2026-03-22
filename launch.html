@@ -22,16 +22,7 @@
 
         <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-        <script>
-            window.MEDCALC_CONFIG = {
-                fhir: {
-                    clientId: "cc344727-6f90-496c-94fd-c7829aa9a51d",
-                    clientSecret: "79f04b56b33491716c0880af72cdef7d3f0629111421cedd18353651cd313d9e",
-                    scope: "launch/patient patient/*.read openid fhirUser online_access",
-                    redirectUri: "index.html"
-                }
-            };
-        </script>
+        <script src="js/app-config.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/fhirclient@2.6.3/build/fhir-client.js"></script>
         <script type="module" src="js/fhir-launch.js"></script>

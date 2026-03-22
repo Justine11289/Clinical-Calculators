@@ -1,82 +1,47 @@
 "use strict";
-// src/fhir-launch.ts
 async function performLaunch() {
-    const statusEl = document.getElementById('status');
-    const subStatusEl = document.getElementById('sub-status');
-    const appWindow = window;
-    // 取得配置
-    const config = appWindow.MEDCALC_CONFIG?.fhir;
-    const FHIR = appWindow.FHIR;
-    if (!config) {
-        console.error("Missing MEDCALC_CONFIG");
-        if (statusEl)
-            statusEl.innerText = "授權初始化失敗：缺少配置資訊";
-        return;
-    }
-    if (!FHIR?.oauth2?.authorize) {
-        console.error("FHIR client not loaded");
-        if (statusEl) {
-            statusEl.innerText = "授權初始化失敗";
-            statusEl.style.color = "red";
-        }
-        if (subStatusEl) {
-            subStatusEl.innerText = "FHIR SDK 載入失敗，請重新整理頁面後再試。";
-        }
-        return;
-    }
+    const config = window.MEDCALC_CONFIG?.fhir;
+    const FHIR = window.FHIR;
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const iss = urlParams.get("iss") || "";
-        // 1. 初始化 Client 參數
-        let clientId = config.clientId;
-        let secret = config.clientSecret;
-        // 2. 自動退避邏輯 (不管您指定的 ID，如果是沙盒就用萬用 ID)
-        if (iss.includes("smarthealthit.org")) {
-            console.log("偵測到沙盒環境，切換至通用 Client ID");
-            clientId = "my_web_app";
-            secret = undefined;
-            if (subStatusEl)
-                subStatusEl.innerText = "偵測到測試沙盒，使用通用憑證中...";
+        let client_id = config?.clientId;
+        let client_secret = config?.clientSecret;
+        // 2. 驗證：若沒輸入 ID，直接噴錯停止執行
+        if (!client_id) {
+            throw new Error("認證失敗：未提供 Client ID。請在 MEDCALC_CONFIG 中設定。");
         }
-        // 3. 將相對路徑轉為絕對 URL (解決連線失敗的關鍵)
-        const absoluteRedirectUri = new URL(config.redirectUri || "index.html", window.location.href).href;
+        const absoluteRedirectUri = new URL(config?.redirectUri || "index.html", window.location.href).href;
+        // 3. 關鍵修正：使用 snake_case 參數名稱，SDK 才能正確識別
         const authorizeOptions = {
-            clientId,
-            scope: config.scope,
-            redirectUri: absoluteRedirectUri,
+            client_id: client_id, // 修正為 client_id
+            scope: config?.scope || "openid fhirUser launch profile patient/*.read online_access",
+            redirect_uri: absoluteRedirectUri, // 修正為 redirect_uri
             completeInTarget: true
         };
-        if (secret) {
-            authorizeOptions.clientSecret = secret;
+        // 4. 若為機密客戶端，加入 Secret
+        if (client_secret) {
+            authorizeOptions.client_secret = client_secret; // 修正為 client_secret
+            console.log("執行機密客戶端授權流程...");
         }
-        // Standalone Launch 處理
+        // 處理無 iss 的情況
         if (!iss) {
-            authorizeOptions.fhirServiceUrl = config.fhirServiceUrl || "https://launch.smarthealthit.org/v/r4/fhir";
+            authorizeOptions.fhirServiceUrl = config?.fhirServiceUrl || "https://launch.smarthealthit.org/v/r4/fhir";
         }
         console.log("正在啟動 FHIR 授權，參數：", authorizeOptions);
-        const redirectTimeout = window.setTimeout(() => {
-            if (statusEl) {
-                statusEl.innerText = "授權跳轉逾時";
-                statusEl.style.color = "red";
-            }
-            if (subStatusEl) {
-                subStatusEl.innerText = "無法導向授權頁面，請檢查瀏覽器封鎖設定或重新啟動流程。";
-            }
-        }, 6000);
-        // 4. 執行跳轉
+        // 執行跳轉
         await FHIR.oauth2.authorize(authorizeOptions);
-        window.clearTimeout(redirectTimeout);
     }
     catch (error) {
         console.error("SMART Launch Error:", error);
+        const statusEl = document.getElementById('status');
         if (statusEl) {
-            statusEl.innerText = "授權初始化失敗";
+            statusEl.innerText = "授權中止";
             statusEl.style.color = "red";
-        }
-        if (subStatusEl) {
-            subStatusEl.innerText = error instanceof Error ? error.message : String(error);
+            const subStatus = document.getElementById('sub-status');
+            if (subStatus)
+                subStatus.innerText = error.message;
         }
     }
 }
-// 啟動流程
 performLaunch();

@@ -1,57 +1,81 @@
-# Dependencies
-node_modules/
-# package-lock.json should be committed for consistency
+# =================================================================
+# 1. 敏感資訊與配置 (Security - 絕對不能上傳)
+# =================================================================
+# 忽略包含真實 Client ID 與 Secret 的配置檔
+js/app-config.js
 
-# Testing
-coverage/
-.nyc_output/
-*.log
+# 保留模板檔（這是要給別人參考格式用的，不含真實密鑰）
+!js/app-config.template.js
 
-# Build output
-dist/
-build/
-*.min.js
-*.min.css
+# 環境變數檔案
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# ===================
-# TypeScript 編譯產物
-# ===================
 
-# js/calculators 目錄中的編譯產物
-# js/calculators/**/*.js
-# js/calculators/**/*.d.ts
-# js/calculators/**/*.js.map
-# js/calculators/**/*.d.ts.map
+# =================================================================
+# 2. TypeScript 編譯產物 (Build Artifacts)
+# =================================================================
+# 忽略所有由 TS 自動生成的 JS、Map 與定義檔
+js/**/*.js
+js/**/*.js.map
+js/**/*.d.ts
+js/**/*.d.ts.map
 
-# js/ 根目錄的自動生成檔案
-# js/*.d.ts
-# js/*.d.ts.map
-# js/*.js.map
-
-# 注意：以下檔案需要保留，不能忽略：
-# - src/*.d.ts (手動編寫的類型宣告)
-# - src/calculators/**/calculation.js (輔助計算檔案)
-# - src/calculators/**/cdc-data.js (資料檔案)
-
-# 保留特定的 JavaScript 輔助檔案
+# --- 例外處理：保留「手動編寫」且「沒有 TS 版本」的 JS 邏輯檔 ---
+# 這些是您專案中原本就存在的原始邏輯，必須保留
 !js/calculators/**/calculation.js
 !js/calculators/**/cdc-data.js
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# 如果 js/ 根目錄下有任何檔案不是從 src/ 編譯來的，請依樣畫葫蘆排除：
+# !js/manual-script.js
 
-# OS
+
+# =================================================================
+# 3. 依賴套件與建置輸出 (Dependencies & Build)
+# =================================================================
+node_modules/
+dist/
+build/
+out/
+.parcel-cache
+.cache
+.temp
+
+
+# =================================================================
+# 4. 測試與記錄 (Testing & Logs)
+# =================================================================
+coverage/
+.nyc_output/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+
+# =================================================================
+# 5. 編輯器與系統檔案 (IDE & OS)
+# =================================================================
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# IntelliJ / WebStorm
+.idea/
+
+# OS 系統檔
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Environment variables
-.env
-.env.local
-
-# Temporary files
+# 暫存檔
 *.tmp
 *.bak
+*.swp
+*~
