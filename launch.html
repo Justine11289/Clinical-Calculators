@@ -22,7 +22,25 @@
 
         <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-        <script src="js/app-config.js"></script>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+
+            window.MEDCALC_CONFIG = {
+                fhir: {
+                    // 完全依賴網址傳參，不寫死任何字串
+                    clientId: urlParams.get("clientId"),
+                    clientSecret: urlParams.get("clientSecret"),
+                    // 允許從網址覆蓋 Scope，若無則用預設
+                    scope: urlParams.get("scope") || "launch launch/patient patient/*.read openid fhirUser online_access",
+                    redirectUri: "index.html"
+                }
+            };
+
+            // 簡單檢查，如果沒抓到 ID，在控制台提醒
+            if (!window.MEDCALC_CONFIG.fhir.clientId) {
+                console.warn("提醒：網址中未偵測到 clientId 參數。");
+            }
+        </script>
 
         <script src="https://cdn.jsdelivr.net/npm/fhirclient@2.6.3/build/fhir-client.js"></script>
         <script type="module" src="js/fhir-launch.js"></script>
