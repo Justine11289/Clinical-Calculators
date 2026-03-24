@@ -2,6 +2,35 @@ async function performLaunch(): Promise<void> {
     const config = (window as any).MEDCALC_CONFIG?.fhir;
     const FHIR = (window as any).FHIR;
 
+    function installTokenBasicAuthInterceptor(clientId: string, clientSecret: string): void {
+        const win = window as any;
+        if (win.__MEDCALC_TOKEN_BASIC_AUTH_PATCHED)
+            return;
+
+        const originalFetch = window.fetch.bind(window);
+        const basicToken = btoa(unescape(encodeURIComponent(`${clientId}:${clientSecret}`)));
+
+        window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+            const requestUrl = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+            const requestMethod = (init?.method || (typeof input !== 'string' && !(input instanceof URL) ? input.method : 'GET')).toUpperCase();
+            const isTokenRequest = /\/auth\/token(?:\?|$)/i.test(requestUrl);
+
+            if (isTokenRequest && requestMethod === 'POST') {
+                const mergedHeaders = new Headers(init?.headers);
+                if (!mergedHeaders.has('Authorization')) {
+                    mergedHeaders.set('Authorization', `Basic ${basicToken}`);
+                }
+
+                const nextInit: RequestInit = { ...init, headers: mergedHeaders };
+                return originalFetch(input, nextInit);
+            }
+
+            return originalFetch(input, init);
+        };
+
+        win.__MEDCALC_TOKEN_BASIC_AUTH_PATCHED = true;
+    }
+
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const iss = urlParams.get('iss') || '';
@@ -29,6 +58,7 @@ async function performLaunch(): Promise<void> {
 
         // Confidential client flow: include client secret when configured.
         if (client_secret) {
+            installTokenBasicAuthInterceptor(client_id, client_secret);
             authorizeOptions.client_secret = client_secret; // 修正為 client_secret
             console.warn(
                 '偵測到 client_secret。瀏覽器端通常不支援機密客戶端 token 交換，若發生 401 請改用 public client。'
