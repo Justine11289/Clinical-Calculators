@@ -60,6 +60,14 @@ window.onload = async () => {
         const win = window;
         if (win.__MEDCALC_READY_BASIC_AUTH_PATCHED)
             return;
+        win.__MEDCALC_AUTH_DEBUG = win.__MEDCALC_AUTH_DEBUG || {
+            interceptor: 'ready',
+            installed: false,
+            matchedCount: 0,
+            lastUrl: '',
+            lastMethod: '',
+            lastInjected: false
+        };
         const params = new URLSearchParams(window.location.search);
         const clientId =
             params.get('clientId') ||
@@ -80,10 +88,15 @@ window.onload = async () => {
             const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
             const method = (init?.method || (typeof input !== 'string' && !(input instanceof URL) ? input.method : 'GET')).toUpperCase();
             if (shouldPatch(url, method)) {
+                win.__MEDCALC_AUTH_DEBUG.matchedCount += 1;
+                win.__MEDCALC_AUTH_DEBUG.lastUrl = url;
+                win.__MEDCALC_AUTH_DEBUG.lastMethod = method;
                 const headers = new Headers(init?.headers);
                 if (!headers.has('Authorization')) {
                     headers.set('Authorization', basic);
                 }
+                win.__MEDCALC_AUTH_DEBUG.lastInjected = headers.has('Authorization');
+                console.info('[MEDCALC][AUTH] ready/fetch token match, Authorization set:', win.__MEDCALC_AUTH_DEBUG.lastInjected);
                 const nextInit = { ...init, headers };
                 return originalFetch(input, nextInit);
             }
@@ -100,16 +113,25 @@ window.onload = async () => {
             const method = this.__medcalcMethod || 'GET';
             const url = this.__medcalcUrl || '';
             if (shouldPatch(url, method)) {
+                win.__MEDCALC_AUTH_DEBUG.matchedCount += 1;
+                win.__MEDCALC_AUTH_DEBUG.lastUrl = url;
+                win.__MEDCALC_AUTH_DEBUG.lastMethod = method;
                 try {
                     this.setRequestHeader('Authorization', basic);
+                    win.__MEDCALC_AUTH_DEBUG.lastInjected = true;
+                    console.info('[MEDCALC][AUTH] ready/xhr token match, Authorization set: true');
                 }
                 catch (_e) {
                     // Ignore and continue request.
+                    win.__MEDCALC_AUTH_DEBUG.lastInjected = false;
+                    console.warn('[MEDCALC][AUTH] ready/xhr token match, failed to set Authorization');
                 }
             }
             return originalSend.apply(this, arguments);
         };
         win.__MEDCALC_READY_BASIC_AUTH_PATCHED = true;
+        win.__MEDCALC_AUTH_DEBUG.installed = true;
+        console.info('[MEDCALC][AUTH] ready interceptor installed');
     }
     async function loadRealFHIRData() {
         patientInfoDiv.innerHTML = '正在連接伺服器並載入病人資料...';
