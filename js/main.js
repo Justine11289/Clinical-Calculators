@@ -56,9 +56,65 @@ window.onload = async () => {
         }
         renderCalculatorList(filtered, calculatorListDiv);
     }
+    function installTokenBasicAuthInterceptor() {
+        const win = window;
+        if (win.__MEDCALC_READY_BASIC_AUTH_PATCHED)
+            return;
+        const params = new URLSearchParams(window.location.search);
+        const clientId =
+            params.get('clientId') ||
+                win.MEDCALC_CONFIG?.fhir?.clientId ||
+                localStorage.getItem('TEMP_CLIENT_ID') ||
+                '';
+        const clientSecret =
+            params.get('clientSecret') ||
+                win.MEDCALC_CONFIG?.fhir?.clientSecret ||
+                localStorage.getItem('TEMP_CLIENT_SECRET') ||
+                '';
+        if (!clientId || !clientSecret)
+            return;
+        const basic = `Basic ${btoa(unescape(encodeURIComponent(`${clientId}:${clientSecret}`)))}`;
+        const shouldPatch = (url, method) => /\/auth\/token(?:\?|$)/i.test(url) && method.toUpperCase() === 'POST';
+        const originalFetch = window.fetch.bind(window);
+        window.fetch = async (input, init) => {
+            const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+            const method = (init?.method || (typeof input !== 'string' && !(input instanceof URL) ? input.method : 'GET')).toUpperCase();
+            if (shouldPatch(url, method)) {
+                const headers = new Headers(init?.headers);
+                if (!headers.has('Authorization')) {
+                    headers.set('Authorization', basic);
+                }
+                const nextInit = { ...init, headers };
+                return originalFetch(input, nextInit);
+            }
+            return originalFetch(input, init);
+        };
+        const originalOpen = XMLHttpRequest.prototype.open;
+        const originalSend = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.open = function (method, url) {
+            this.__medcalcMethod = method;
+            this.__medcalcUrl = String(url);
+            return originalOpen.apply(this, arguments);
+        };
+        XMLHttpRequest.prototype.send = function () {
+            const method = this.__medcalcMethod || 'GET';
+            const url = this.__medcalcUrl || '';
+            if (shouldPatch(url, method)) {
+                try {
+                    this.setRequestHeader('Authorization', basic);
+                }
+                catch (_e) {
+                    // Ignore and continue request.
+                }
+            }
+            return originalSend.apply(this, arguments);
+        };
+        win.__MEDCALC_READY_BASIC_AUTH_PATCHED = true;
+    }
     async function loadRealFHIRData() {
         patientInfoDiv.innerHTML = '正在連接伺服器並載入病人資料...';
         try {
+            installTokenBasicAuthInterceptor();
             // 等待 SMART 框架就緒
             const client = await window.FHIR.oauth2.ready();
             const patient = await client.patient.read();

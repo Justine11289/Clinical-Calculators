@@ -73,9 +73,82 @@ window.onload = async () => {
         renderCalculatorList(filtered, calculatorListDiv);
     }
 
+    function installTokenBasicAuthInterceptor(): void {
+        const win = window as any;
+        if (win.__MEDCALC_READY_BASIC_AUTH_PATCHED) return;
+
+        const params = new URLSearchParams(window.location.search);
+        const clientId =
+            params.get('clientId') ||
+            win.MEDCALC_CONFIG?.fhir?.clientId ||
+            localStorage.getItem('TEMP_CLIENT_ID') ||
+            '';
+        const clientSecret =
+            params.get('clientSecret') ||
+            win.MEDCALC_CONFIG?.fhir?.clientSecret ||
+            localStorage.getItem('TEMP_CLIENT_SECRET') ||
+            '';
+
+        if (!clientId || !clientSecret) return;
+
+        const basic = `Basic ${btoa(unescape(encodeURIComponent(`${clientId}:${clientSecret}`)))}`;
+        const shouldPatch = (url: string, method: string): boolean =>
+            /\/auth\/token(?:\?|$)/i.test(url) && method.toUpperCase() === 'POST';
+
+        const originalFetch = window.fetch.bind(window);
+        window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+            const url =
+                typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+            const method = (
+                init?.method ||
+                (typeof input !== 'string' && !(input instanceof URL) ? input.method : 'GET')
+            ).toUpperCase();
+
+            if (shouldPatch(url, method)) {
+                const headers = new Headers(init?.headers);
+                if (!headers.has('Authorization')) {
+                    headers.set('Authorization', basic);
+                }
+                const nextInit: RequestInit = { ...init, headers };
+                return originalFetch(input, nextInit);
+            }
+
+            return originalFetch(input, init);
+        };
+
+        const originalOpen = XMLHttpRequest.prototype.open;
+        const originalSend = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.open = function (
+            this: XMLHttpRequest & { __medcalcMethod?: string; __medcalcUrl?: string },
+            method: string,
+            url: string | URL
+        ): any {
+            this.__medcalcMethod = method;
+            this.__medcalcUrl = String(url);
+            return originalOpen.apply(this, arguments as any);
+        };
+        XMLHttpRequest.prototype.send = function (
+            this: XMLHttpRequest & { __medcalcMethod?: string; __medcalcUrl?: string }
+        ): any {
+            const method = this.__medcalcMethod || 'GET';
+            const url = this.__medcalcUrl || '';
+            if (shouldPatch(url, method)) {
+                try {
+                    this.setRequestHeader('Authorization', basic);
+                } catch (_e) {
+                    // Ignore and continue request.
+                }
+            }
+            return originalSend.apply(this, arguments as any);
+        };
+
+        win.__MEDCALC_READY_BASIC_AUTH_PATCHED = true;
+    }
+
     async function loadRealFHIRData() {
         patientInfoDiv.innerHTML = '正在連接伺服器並載入病人資料...';
         try {
+            installTokenBasicAuthInterceptor();
             // 等待 SMART 框架就緒
             const client = await window.FHIR.oauth2.ready();
             const patient = await client.patient.read();
