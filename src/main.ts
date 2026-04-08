@@ -52,7 +52,9 @@ window.onload = async () => {
     const categorySelect = document.getElementById('category-select') as HTMLSelectElement;
     const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
     const statsText = document.getElementById('calculator-stats') as HTMLElement;
-    const filterButtons = Array.from(document.querySelectorAll('.filter-btn')) as HTMLButtonElement[];
+    const filterButtons = Array.from(
+        document.querySelectorAll('.filter-btn')
+    ) as HTMLButtonElement[];
 
     if (!patientInfoDiv || !calculatorListDiv || !searchBar) return;
 
@@ -82,7 +84,8 @@ window.onload = async () => {
             filtered.sort((a, b) => b.title.localeCompare(a.title));
         } else if (currentSortType === 'most-used') {
             filtered.sort((a, b) => {
-                const usageDiff = favoritesManager.getUsageCount(b.id) - favoritesManager.getUsageCount(a.id);
+                const usageDiff =
+                    favoritesManager.getUsageCount(b.id) - favoritesManager.getUsageCount(a.id);
                 if (usageDiff !== 0) return usageDiff;
                 return a.title.localeCompare(b.title);
             });
