@@ -38,23 +38,100 @@ window.onload = async () => {
     const calculatorListDiv = document.getElementById('calculator-list');
     const searchBar = document.getElementById('search-bar');
     const categorySelect = document.getElementById('category-select');
+    const sortSelect = document.getElementById('sort-select');
+    const statsText = document.getElementById('calculator-stats');
+    const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
     if (!patientInfoDiv || !calculatorListDiv || !searchBar)
         return;
-    // 修正：這裡改用 const，因為在此版本中我們不打算重新賦值
-    const currentSortType = 'a-z';
+    let currentSortType = 'a-z';
+    let currentListFilter = 'all';
     let currentCategory = 'all';
     function updateDisplay() {
         const searchTerm = searchBar.value.toLowerCase();
-        // 修正：這裡改用 const，因為它是 filter 的結果，宣告後未再更動
         const filtered = calculatorModules.filter(calc => {
             const matchesSearch = calc.title.toLowerCase().includes(searchTerm);
             const matchesCategory = currentCategory === 'all' || calc.category === currentCategory;
-            return matchesSearch && matchesCategory;
+            let matchesListFilter = true;
+            if (currentListFilter === 'favorites') {
+                matchesListFilter = favoritesManager.isFavorite(calc.id);
+            }
+            else if (currentListFilter === 'recent') {
+                matchesListFilter = favoritesManager.getRecent().includes(calc.id);
+            }
+            return matchesSearch && matchesCategory && matchesListFilter;
         });
         if (currentSortType === 'a-z') {
             filtered.sort((a, b) => a.title.localeCompare(b.title));
         }
+        else if (currentSortType === 'z-a') {
+            filtered.sort((a, b) => b.title.localeCompare(a.title));
+        }
+        else if (currentSortType === 'most-used') {
+            filtered.sort((a, b) => {
+                const usageDiff = favoritesManager.getUsageCount(b.id) - favoritesManager.getUsageCount(a.id);
+                if (usageDiff !== 0)
+                    return usageDiff;
+                return a.title.localeCompare(b.title);
+            });
+        }
         renderCalculatorList(filtered, calculatorListDiv);
+        if (statsText) {
+            statsText.textContent = `Showing ${filtered.length} / ${calculatorModules.length}`;
+        }
+    }
+    function initializeCategoryOptions() {
+        if (!categorySelect)
+            return;
+        categorySelect.innerHTML = '';
+        const allOption = document.createElement('option');
+        allOption.value = 'all';
+        allOption.textContent = 'All Categories';
+        categorySelect.appendChild(allOption);
+        Object.entries(categories).forEach(([key, label]) => {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = label;
+            categorySelect.appendChild(option);
+        });
+        categorySelect.value = currentCategory;
+    }
+    function initializeFilters() {
+        filterButtons.forEach(button => {
+            button.onclick = () => {
+                const filterType = button.dataset.filter;
+                if (!filterType)
+                    return;
+                currentListFilter = filterType;
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                updateDisplay();
+            };
+        });
+    }
+    function initializeSort() {
+        if (!sortSelect)
+            return;
+        currentSortType = sortSelect.value || 'a-z';
+        sortSelect.onchange = e => {
+            currentSortType = e.target.value;
+            updateDisplay();
+        };
+    }
+    function installUsageTracking() {
+        calculatorListDiv.addEventListener('click', event => {
+            const target = event.target;
+            if (target.closest('.favorite-btn'))
+                return;
+            const listItem = target.closest('.list-item');
+            if (!listItem)
+                return;
+            const url = new URL(listItem.href, window.location.origin);
+            const calculatorId = url.searchParams.get('id');
+            if (!calculatorId)
+                return;
+            favoritesManager.addToRecent(calculatorId);
+            favoritesManager.trackUsage(calculatorId);
+        });
     }
     function installTokenBasicAuthInterceptor() {
         const win = window;
@@ -160,7 +237,17 @@ window.onload = async () => {
             updateDisplay();
         };
     }
+    favoritesManager.addListener(type => {
+        if (type === 'favorites' || type === 'recent') {
+            updateDisplay();
+        }
+    });
+    initializeCategoryOptions();
+    initializeFilters();
+    initializeSort();
+    installUsageTracking();
+    // 先顯示清單，避免 FHIR ready 等待期間整個側邊控制看起來失效。
+    updateDisplay();
     searchBar.oninput = updateDisplay;
     await loadRealFHIRData();
-    updateDisplay();
 };
