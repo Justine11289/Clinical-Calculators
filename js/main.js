@@ -54,7 +54,9 @@ window.onload = async () => {
     if (hasSmartParams) {
         sessionStorage.setItem('MEDCALC_SMART_PARAMS', currentParams.toString());
     }
-    const persistedSmartParams = new URLSearchParams(hasSmartParams ? currentParams.toString() : sessionStorage.getItem('MEDCALC_SMART_PARAMS') || '');
+    const persistedSmartParams = new URLSearchParams(hasSmartParams
+        ? currentParams.toString()
+        : sessionStorage.getItem('MEDCALC_SMART_PARAMS') || '');
     function updateDisplay() {
         const searchTerm = searchBar.value.toLowerCase();
         const filtered = calculatorModules.filter(calc => {
