@@ -64,7 +64,7 @@ The system is designed with a three-tier architecture to ensure logic accuracy a
 * Ecosystem Expansion: Promoting standardized templates across different hospital systems to create a shared ecosystem of clinical calculators.
 * Personalized Logic: Developing custom calculation functions to adapt to specific clinical scenarios.
 ### Credits & License
-* Development: Justine Huang, Rian Chen, and Chang Gung Memorial Hospital (CGMH)
+* Development: Yu-Ying Lu, Tzu-Ting Huang, Che Chen, and Chang Gung Memorial Hospital (CGMH)
 * Technical Standards: HL7 FHIR Standard, TW Core IG, LOINC Codes
 * License: MIT License
 
