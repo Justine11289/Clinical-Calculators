@@ -1,4 +1,4 @@
-# SMART on FHIR Intelligent Clinical Decision Calculator Platform
+# Clinical Decision Calculator Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
@@ -69,12 +69,12 @@ The system is designed with a three-tier architecture to ensure logic accuracy a
 * License: MIT License
 
 ## Getting Started
-**Launch URL**: [https://justine11289.github.io/SMART-on-FHIR-Intelligent-Clinical-Decision-Calculator-Platform/launch](https://justine11289.github.io/SMART-on-FHIR-Intelligent-Clinical-Decision-Calculator-Platform/launch)
+**Launch URL**: [https://justine11289.github.io/Clinical-Decision-Calculator-Platform/launch](https://justine11289.github.io/Clinical-Decision-Calculator-Platform/launch)
 
 **Docker Deployment**
 ```bash
-git clone [https://github.com/justine11289/SMART-on-FHIR-Intelligent-Clinical-Decision-Calculator-Platform.git](https://github.com/justine11289/SMART-on-FHIR-Intelligent-Clinical-Decision-Calculator-Platform.git)
-cd SMART-on-FHIR-Intelligent-Clinical-Decision-Calculator-Platform
+git clone [https://github.com/justine11289/Clinical-Decision-Calculator-Platform.git](https://github.com/justine11289/Clinical-Decision-Calculator-Platform.git)
+cd Clinical-Decision-Calculator-Platform
 npm install
 npm run build:ts  # Transpile TypeScript
 npm start         # Launch local development server
